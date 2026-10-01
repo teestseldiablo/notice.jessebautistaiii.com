@@ -9,13 +9,13 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 740 390'><rect width='740' height='390' fill='%23bf0a30'/><g fill='%23fff'><rect y='30' width='740' height='30'/><rect y='90' width='740' height='30'/><rect y='150' width='740' height='30'/><rect y='210' width='740' height='30'/><rect y='270' width='740' height='30'/><rect y='330' width='740' height='30'/></g><rect width='296' height='210' fill='%23002868'/></svg>">
 
     <!-- SEO & Metadata Optimization -->
-    <meta name="description" content="Comprehensive public citizen portal featuring major American history milestones from 1700 to the present, state capital registries, and public documents. Maintained by Jesse Bautista III.">
+    <meta name="description" content="Comprehensive public citizen portal featuring rich American history milestones from 1700 to the present, state capital registries, and international alliances. Maintained by Jesse Bautista III.">
     <meta name="author" content="Jesse Bautista III">
     <link rel="canonical" href="https://notice.jessebautistaiii.com">
 
     <!-- Open Graph / Social SEO -->
-    <meta property="og:title" content="American Citizen Portal | History & Registry">
-    <meta property="og:description" content="Interactive map of major American historical events from 1700 to present and state capital portals.">
+    <meta property="og:title" content="American Citizen Portal | Rich History & Registry">
+    <meta property="og:description" content="Interactive map of major American historical events, constitutional milestones, civil rights movements, international conflicts, and state capital portals.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://notice.jessebautistaiii.com">
     <meta property="og:site_name" content="American Citizen Portal">
@@ -39,7 +39,7 @@
 
     <header class="site-header">
         <h1>American Citizen Portal</h1>
-        <p>1700&ndash;Present Historical Registry &mdash; Maintained by <a href="https://jessebautistaiii.com" target="_blank" rel="author">Jesse Bautista III</a></p>
+        <p>Rich Historical Registry &mdash; Maintained by <a href="https://jessebautistaiii.com" target="_blank" rel="author">Jesse Bautista III</a></p>
     </header>
 
     <!-- Upgraded State Modal with 4D Waving American Flag Background -->
@@ -115,14 +115,42 @@
             "Wisconsin": [-89.4012, 43.0731], "Wyoming": [-104.8202, 41.1400]
         };
 
-        // Comprehensive American Historical Events (1700 to Present) including Washington, D.C.
+        // Rich & Comprehensive American Historical Events (Domestic & International)
         const historicalEvents = [
             {
                 name: "The White House, Washington, D.C. (1800)",
                 coords: [-77.0366, 38.8977],
                 year: "1800",
-                description: "Official workplace and residence of the President of the United States, completed in 1800.",
+                description: "Official workplace and residence of the President of the United States. Also the center of executive operations, including the Oval Office and historical crises.",
                 wikidata: "https://www.wikidata.org/wiki/Q35525"
+            },
+            {
+                name: "Watergate Complex, Washington, D.C. (1972)",
+                coords: [-77.0545, 38.8993],
+                year: "1972",
+                description: "Site of the infamous June 1972 burglary of the Democratic National Committee headquarters, leading to the Nixon administration phone-tapping scandals, investigations, and Richard Nixon's resignation.",
+                wikidata: "https://www.wikidata.org/wiki/Q11244"
+            },
+            {
+                name: "U.S. Capitol, Prohibition Proposal & Volstead Act (1917–1919)",
+                coords: [-77.0091, 38.8899],
+                year: "1917–1919",
+                description: "Where Congress passed the 18th Amendment and the Volstead Act, nationally proposing and enacting the prohibition of alcohol across the United States.",
+                wikidata: "https://www.wikidata.org/wiki/Q54113"
+            },
+            {
+                name: "White House, Declaration of the War on Drugs (1971)",
+                coords: [-77.0366, 38.8977],
+                year: "1971",
+                description: "President Richard Nixon officially declared drug abuse 'public enemy number one' in the United States, officially launching the federal War on Drugs and establishing the DEA.",
+                wikidata: "https://www.wikidata.org/wiki/Q35525"
+            },
+            {
+                name: "Black Panther Party Headquarters, Oakland, CA (1966)",
+                coords: [-122.2712, 37.8044],
+                year: "1966",
+                description: "Founded in Oakland, California by Huey P. Newton and Bobby Seale as a revolutionary Black nationalist and socialist organization fighting police brutality and empowering communities.",
+                wikidata: "https://www.wikidata.org/wiki/Q206387"
             },
             {
                 name: "Salem Witch Trials (1692)",
@@ -219,15 +247,36 @@
                 name: "Pearl Harbor Attack (1941)",
                 coords: [-157.9504, 21.3649],
                 year: "1941",
-                description: "Surprise military strike upon the United States naval base in Honolulu, Hawaii by the Empire of Japan.",
+                description: "Surprise military strike upon the United States naval base in Honolulu, Hawaii by the Empire of Japan, thrusting the U.S. into World War II.",
                 wikidata: "https://www.wikidata.org/wiki/Q7390"
+            },
+            {
+                name: "Normandy Landings - D-Day, France (1944)",
+                coords: [-0.8546, 49.3400],
+                year: "1944",
+                description: "U.S. and Allied forces landed on the beaches of Normandy, France, initiating the liberation of Western Europe from Nazi occupation during WWII.",
+                wikidata: "https://www.wikidata.org/wiki/Q128522"
             },
             {
                 name: "Trinity Site, First Atomic Test (1945)",
                 coords: [-106.4777, 33.6773],
                 year: "1945",
-                description: "First detonation of a nuclear weapon, conducted by the United States Army in New Mexico.",
+                description: "First detonation of a nuclear weapon, conducted by the United States Army in New Mexico, ending World War II.",
                 wikidata: "https://www.wikidata.org/wiki/Q651268"
+            },
+            {
+                name: "Berlin Airlift Command, Germany (1948–1949)",
+                coords: [13.4050, 52.5200],
+                year: "1948–1949",
+                description: "U.S. Air Force and allies supplied West Berlin by air after Soviet blockades, establishing a monumental Cold War humanitarian and logistical victory.",
+                wikidata: "https://www.wikidata.org/wiki/Q152432"
+            },
+            {
+                name: "Incheon Landing & Korean War Operations (1950)",
+                coords: [126.7052, 37.4563],
+                year: "1950",
+                description: "U.S.-led United Nations amphibious invasion at Incheon, Korea, turning the tide against communist forces to defend South Korea.",
+                wikidata: "https://www.wikidata.org/wiki/Q200729"
             },
             {
                 name: "March on Washington (1963)",
@@ -235,6 +284,13 @@
                 year: "1963",
                 description: "Massive civil rights protest where Martin Luther King Jr. delivered his 'I Have a Dream' speech in Washington, D.C.",
                 wikidata: "https://www.wikidata.org/wiki/Q923363"
+            },
+            {
+                name: "Saigon Evacuation & Vietnam War End (1975)",
+                coords: [106.6297, 10.8231],
+                year: "1975",
+                description: "The culmination of U.S. military involvement in Vietnam, marked by Operation Frequent Wind and the fall of Saigon.",
+                wikidata: "https://www.wikidata.org/wiki/Q189569"
             },
             {
                 name: "Apollo 11 Moon Landing Launch (1969)",
@@ -247,7 +303,7 @@
                 name: "World Trade Center Site (2001)",
                 coords: [-74.0134, 40.7115],
                 year: "2001",
-                description: "New York City: Site of the September 11 terrorist attacks, shaping modern American security and defense.",
+                description: "New York City: Site of the September 11 terrorist attacks, shaping modern American security, global defense, and the War on Terror.",
                 wikidata: "https://www.wikidata.org/wiki/Q11256"
             }
         ];
@@ -262,7 +318,7 @@
             if (isHistory) {
                 linksContainer.innerHTML = `
                     <a class="resource-btn" href="${wikidataUrl}" target="_blank"><span>Wikidata Record</span> &rarr;</a>
-                    <a class="resource-btn" href="https://www.whitehouse.gov" target="_blank"><span>Official White House Portal</span> &rarr;</a>
+                    <a class="resource-btn" href="https://www.loc.gov" target="_blank"><span>Library of Congress Archives</span> &rarr;</a>
                 `;
             } else {
                 const stateSlug = title.toLowerCase().replace(/\s+/g, '');
@@ -307,7 +363,7 @@
             }
         });
 
-        // Add Historical Event Markers with THE Exact White House in D.C. Silhouette Icon
+        // Add Historical Event Markers (Domestic & International)
         historicalEvents.forEach(evt => {
             const isWhiteHouse = evt.name.includes("White House");
             
@@ -320,7 +376,6 @@
                 isHistory: true
             });
 
-            // If it's the White House, use an unmistakable neoclassical mansion silhouette with central triangular pediment & columns
             const iconSvg = isWhiteHouse 
                 ? 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="36" height="36"><circle cx="16" cy="16" r="15" fill="%231D4ED8" stroke="%23FFFFFF" stroke-width="2"/><path d="M16 6l7 4v2H9v-2l7-4zm-6 8h12v1H10v-1zm1 2h10v10H11v-10zm2 2v6h2v-6h-2zm4 0v6h2v-6h-2z" fill="%23FFFFFF"/></svg>'
                 : 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30"><circle cx="12" cy="12" r="11" fill="%231D4ED8" stroke="%23FFFFFF" stroke-width="1.5"/><path d="M12 3l5 3v1H7V6l5-3zm-5 6h10v1H7V9zm1 2h8v7H8v-7zm1 1v5h2v-5H9zm4 0v5h2v-5h-2z" fill="%23FFFFFF"/></svg>';
