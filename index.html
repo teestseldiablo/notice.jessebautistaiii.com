@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>American Citizen Portal | Public Notice & Knowledge Base</title>
     
+    <!-- Custom American Flag Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 740 390'><rect width='740' height='390' fill='%23bf0a30'/><g fill='%23fff'><rect y='30' width='740' height='30'/><rect y='90' width='740' height='30'/><rect y='150' width='740' height='30'/><rect y='210' width='740' height='30'/><rect y='270' width='740' height='30'/><rect y='330' width='740' height='30'/></g><rect width='296' height='210' fill='%23002868'/></svg>">
+
     <!-- SEO & Metadata Optimization -->
     <meta name="description" content="Public citizen portal and knowledge base providing geographic data, state capital registries, and civic resources. Created and maintained by Jesse Bautista III.">
     <meta name="author" content="Jesse Bautista III">
@@ -52,8 +55,13 @@
     }
     </script>
 
+    <!-- Google Fonts: Cinzel & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="assets/style.css">
-    <!-- OpenLayers (Open Maps) CSS -->
+    <!-- OpenLayers CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v10.2.1/ol.css">
 </head>
 <body>
@@ -69,14 +77,39 @@
         <p>Public Knowledge Registry &mdash; Maintained by <a href="https://jessebautistaiii.com" target="_blank" rel="author">Jesse Bautista III</a></p>
     </header>
 
+    <!-- Upgraded State Modal with 4D Waving American Flag Background -->
     <div class="state-modal" id="stateModal">
-        <h2 id="modalStateName">State</h2>
-        <h3 id="modalCapitalName">Capital</h3>
-        <div class="resource-links" id="modalLinks"></div>
-        <button class="close-modal" onclick="closeStateModal()">Close</button>
+        <div class="flag-bg-container">
+            <svg class="waving-flag" viewBox="0 0 740 390" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="flagShade" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="rgba(0,0,0,0.4)" />
+                        <stop offset="50%" stop-color="rgba(255,255,255,0.15)" />
+                        <stop offset="100%" stop-color="rgba(0,0,0,0.5)" />
+                    </linearGradient>
+                </defs>
+                <rect width="740" height="390" fill="#bf0a30"/>
+                <g fill="#fff">
+                    <rect y="30" width="740" height="30"/>
+                    <rect y="90" width="740" height="30"/>
+                    <rect y="150" width="740" height="30"/>
+                    <rect y="210" width="740" height="30"/>
+                    <rect y="270" width="740" height="30"/>
+                    <rect y="330" width="740" height="30"/>
+                </g>
+                <rect width="296" height="210" fill="#002868"/>
+                <rect width="740" height="390" fill="url(#flagShade)" />
+            </svg>
+        </div>
+        <div class="modal-content-wrapper">
+            <h2 id="modalStateName">State</h2>
+            <h3 id="modalCapitalName">Capital</h3>
+            <div class="resource-links" id="modalLinks"></div>
+            <button class="close-modal" onclick="closeStateModal()">Close Portal</button>
+        </div>
     </div>
 
-    <!-- OpenLayers (Open Maps) JS Library -->
+    <!-- OpenLayers JS Library -->
     <script src="https://cdn.jsdelivr.net/npm/ol@v10.2.1/dist/ol.js"></script>
 
     <script>
@@ -166,7 +199,6 @@
             source: vectorSource
         });
 
-        // Initialize OpenLayers Map with standard OpenStreetMap raster tiles (showing terrain, labels, geography)
         const map = new ol.Map({
             target: 'map',
             layers: [
