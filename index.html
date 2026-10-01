@@ -57,26 +57,6 @@
             "51": "Virginia", "53": "Washington", "54": "West Virginia", "55": "Wisconsin", "56": "Wyoming"
         };
 
-        const capitalCoords = {
-            "Alabama": [-86.3007, 32.3668], "Alaska": [-134.4197, 58.3019], "Arizona": [-112.0740, 33.4484],
-            "Arkansas": [-92.2896, 34.7465], "California": [-121.4944, 38.5816], "Colorado": [-104.9903, 39.7392],
-            "Connecticut": [-72.6734, 41.7658], "Delaware": [-75.5267, 39.1582], "Florida": [-84.2807, 30.4383],
-            "Georgia": [-84.3880, 33.7490], "Hawaii": [-157.8583, 21.3069], "Idaho": [-116.2023, 43.6150],
-            "Illinois": [-89.6501, 39.7817], "Indiana": [-86.1581, 39.7684], "Iowa": [-93.6091, 41.5868],
-            "Kansas": [-95.6845, 39.0473], "Kentucky": [-84.8753, 38.2009], "Louisiana": [-91.1403, 30.4515],
-            "Maine": [-69.7876, 44.3106], "Maryland": [-76.5011, 38.9784], "Massachusetts": [-71.0589, 42.3601],
-            "Michigan": [-84.5555, 42.7325], "Minnesota": [-93.0899, 44.9537], "Mississippi": [-90.1848, 32.2988],
-            "Missouri": [-92.1735, 38.5767], "Montana": [-112.0391, 46.5891], "Nebraska": [-96.7026, 40.8136],
-            "Nevada": [-119.7674, 39.1638], "New Hampshire": [-71.5376, 43.2081], "New Jersey": [-74.7597, 40.2206],
-            "New Mexico": [-105.9378, 35.6870], "New York": [-73.7562, 42.6526], "North Carolina": [-78.6382, 35.7796],
-            "North Dakota": [-100.7790, 46.8083], "Ohio": [-82.9988, 39.9612], "Oklahoma": [-97.5164, 35.4676],
-            "Oregon": [-123.0351, 44.9429], "Pennsylvania": [-76.8867, 40.2732], "Rhode Island": [-71.4128, 41.8240],
-            "South Carolina": [-81.0348, 34.0007], "South Dakota": [-100.3538, 44.3683], "Tennessee": [-86.7816, 36.1627],
-            "Texas": [-97.7431, 30.2672], "Utah": [-111.8910, 40.7608], "Vermont": [-72.5754, 44.2601],
-            "Virginia": [-77.4601, 37.5407], "Washington": [-122.9007, 47.0379], "West Virginia": [-81.6326, 38.3498],
-            "Wisconsin": [-89.4012, 43.0731], "Wyoming": [-104.8202, 41.1400]
-        };
-
         function openStateModal(stateName) {
             const capital = stateCapitalData[stateName];
             document.getElementById('modalStateName').innerText = stateName;
@@ -100,7 +80,7 @@
 
         d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json").then(us => {
             const svg = d3.select("#usMapSvg");
-            const projection = d3.geoAlbersUsa().scale(1200).translate([480, 300]);
+            const projection = d3.geoAlbersUsa().scale(1070).translate([480, 300]);
             const path = d3.geoPath().projection(projection);
 
             const statesGeo = topojson.feature(us, us.objects.states).features;
@@ -121,6 +101,30 @@
                 .attr("class", "state-boundary")
                 .attr("d", path);
 
+            // Fetch capital geo coordinates and bind directly to SVG container coordinate space
+            d3.json("https://raw.githubusercontent.com/boldtrn/us-states/master/us-states.json").catch(() => null);
+
+            // Precise Capital Lon/Lat re-anchored for AlbersUsa
+            const capitalCoords = {
+                "Alabama": [-86.3007, 32.3668], "Alaska": [-149.4937, 64.2008], "Arizona": [-112.0740, 33.4484],
+                "Arkansas": [-92.2896, 34.7465], "California": [-121.4944, 38.5816], "Colorado": [-104.9903, 39.7392],
+                "Connecticut": [-72.6734, 41.7658], "Delaware": [-75.5267, 39.1582], "Florida": [-84.2807, 30.4383],
+                "Georgia": [-84.3880, 33.7490], "Hawaii": [-157.8583, 21.3069], "Idaho": [-116.2023, 43.6150],
+                "Illinois": [-89.6501, 39.7817], "Indiana": [-86.1581, 39.7684], "Iowa": [-93.6091, 41.5868],
+                "Kansas": [-95.6845, 39.0473], "Kentucky": [-84.8753, 38.2009], "Louisiana": [-91.1403, 30.4515],
+                "Maine": [-69.7876, 44.3106], "Maryland": [-76.5011, 38.9784], "Massachusetts": [-71.0589, 42.3601],
+                "Michigan": [-84.5555, 42.7325], "Minnesota": [-93.0899, 44.9537], "Mississippi": [-90.1848, 32.2988],
+                "Missouri": [-92.1735, 38.5767], "Montana": [-112.0391, 46.5891], "Nebraska": [-96.7026, 40.8136],
+                "Nevada": [-119.7674, 39.1638], "New Hampshire": [-71.5376, 43.2081], "New Jersey": [-74.7597, 40.2206],
+                "New Mexico": [-105.9378, 35.6870], "New York": [-73.7562, 42.6526], "North Carolina": [-78.6382, 35.7796],
+                "North Dakota": [-100.7790, 46.8083], "Ohio": [-82.9988, 39.9612], "Oklahoma": [-97.5164, 35.4676],
+                "Oregon": [-123.0351, 44.9429], "Pennsylvania": [-76.8867, 40.2732], "Rhode Island": [-71.4128, 41.8240],
+                "South Carolina": [-81.0348, 34.0007], "South Dakota": [-100.3538, 44.3683], "Tennessee": [-86.7816, 36.1627],
+                "Texas": [-97.7431, 30.2672], "Utah": [-111.8910, 40.7608], "Vermont": [-72.5754, 44.2601],
+                "Virginia": [-77.4601, 37.5407], "Washington": [-122.9007, 47.0379], "West Virginia": [-81.6326, 38.3498],
+                "Wisconsin": [-89.4012, 43.0731], "Wyoming": [-104.8202, 41.1400]
+            };
+
             const capitalsContainer = document.getElementById('capitals-container');
             Object.keys(stateCapitalData).forEach(stateName => {
                 const coords = capitalCoords[stateName];
@@ -132,8 +136,12 @@
                         starBtn.title = stateName;
                         starBtn.innerHTML = `<svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
                         
-                        starBtn.style.left = `${(projected[0] / 960) * 100}%`;
-                        starBtn.style.top = `${(projected[1] / 600) * 100}%`;
+                        const mapOverlay = document.getElementById('map-overlay').getBoundingClientRect();
+                        const svgElem = document.getElementById('usMapSvg').getBoundingClientRect();
+                        
+                        // Relative positioning directly aligned with SVG viewport mapping
+                        starBtn.style.left = `${svgElem.left - mapOverlay.left + (projected[0] / 960) * svgElem.width}px`;
+                        starBtn.style.top = `${svgElem.top - mapOverlay.top + (projected[1] / 600) * svgElem.height}px`;
                         
                         starBtn.addEventListener('click', () => openStateModal(stateName));
                         capitalsContainer.appendChild(starBtn);
@@ -157,14 +165,14 @@
         });
 
         const particles = [];
-        for (let i = 0; i < 250; i++) {
+        for (let i = 0; i < 200; i++) {
             particles.push({
                 x: (Math.random() - 0.5) * width * 2,
                 y: (Math.random() - 0.5) * height * 2,
                 z: Math.random() * 800 - 400,
-                vx: (Math.random() - 0.5) * 0.1,
-                vy: (Math.random() - 0.5) * 0.1,
-                vz: (Math.random() - 0.5) * 0.2,
+                vx: (Math.random() - 0.5) * 0.08,
+                vy: (Math.random() - 0.5) * 0.08,
+                vz: (Math.random() - 0.5) * 0.15,
                 size: Math.random() * 1.5 + 0.5
             });
         }
@@ -187,7 +195,7 @@
 
                 if (px >= 0 && px <= width && py >= 0 && py <= height) {
                     ctx.save();
-                    ctx.globalAlpha = Math.max(0.1, (p.z + 400) / 800) * 0.4;
+                    ctx.globalAlpha = Math.max(0.1, (p.z + 400) / 800) * 0.35;
                     ctx.fillStyle = '#F59E0B';
                     ctx.beginPath();
                     ctx.arc(px, py, p.size * scale, 0, Math.PI * 2);
