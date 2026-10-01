@@ -4,7 +4,7 @@
     --old-glory-blue: #1E3A8A;
     --pure-white: #FFFFFF;
     --gold: #F59E0B;
-    --glass-bg: rgba(3, 7, 18, 0.85);
+    --glass-bg: rgba(3, 7, 18, 0.88);
     --border-glow: rgba(245, 158, 11, 0.3);
 }
 
@@ -36,18 +36,18 @@ body, html {
     height: 100%;
     z-index: 2;
     pointer-events: none;
-    background: radial-gradient(circle at center, transparent 30%, rgba(3, 7, 18, 0.92) 90%);
+    background: radial-gradient(circle at center, transparent 20%, rgba(3, 7, 18, 0.95) 90%);
 }
 
-/* Geographic State Map Layer Overlay */
+/* Local Embedded SVG Map Layer Overlay */
 #map-overlay {
     position: absolute;
-    top: 50%;
+    top: 52%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 90vw;
-    max-width: 1100px;
-    height: 70vh;
+    width: 88vw;
+    max-width: 1050px;
+    height: 65vh;
     z-index: 5;
     pointer-events: none;
 }
@@ -59,19 +59,19 @@ body, html {
 }
 
 .state-path {
-    fill: rgba(10, 25, 47, 0.65);
-    stroke: rgba(245, 158, 11, 0.4);
-    stroke-width: 1.25px;
+    fill: rgba(10, 25, 47, 0.75);
+    stroke: rgba(245, 158, 11, 0.45);
+    stroke-width: 1.5px;
     cursor: pointer;
     pointer-events: auto;
     transition: all 0.25s ease;
 }
 
 .state-path:hover {
-    fill: rgba(220, 38, 38, 0.4);
+    fill: rgba(220, 38, 38, 0.5);
     stroke: var(--gold);
-    stroke-width: 2.25px;
-    filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.6));
+    stroke-width: 2.5px;
+    filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.7));
 }
 
 .ui-overlay {
@@ -98,7 +98,7 @@ header {
     padding: 1.25rem 2rem;
     border-radius: 12px;
     pointer-events: auto;
-    max-width: 600px;
+    max-width: 580px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
 }
 
@@ -149,15 +149,15 @@ nav a:hover {
     display: flex;
     align-items: center;
     gap: 4px;
-    background: rgba(3, 7, 18, 0.75);
+    background: rgba(3, 7, 18, 0.85);
     padding: 2px 6px;
     border-radius: 4px;
-    border: 1px solid rgba(245, 158, 11, 0.3);
+    border: 1px solid rgba(245, 158, 11, 0.4);
     transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .capital-marker:hover {
-    background: rgba(220, 38, 38, 0.8);
+    background: rgba(220, 38, 38, 0.9);
     transform: translate(-50%, -50%) scale(1.15);
     border-color: var(--gold);
 }
@@ -175,7 +175,7 @@ nav a:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.9);
-    background: rgba(10, 25, 47, 0.95);
+    background: rgba(10, 25, 47, 0.96);
     backdrop-filter: blur(20px);
     border: 1px solid var(--border-glow);
     border-top: 4px solid var(--old-glory-red);

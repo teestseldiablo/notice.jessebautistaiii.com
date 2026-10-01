@@ -14,9 +14,69 @@
     </div>
     <div class="cinematic-vignette"></div>
 
-    <!-- Accurate Geographic State Outlines Map Overlay (Using D3 / TopoJSON US States Integration) -->
+    <!-- Local Self-Contained SVG Map Overlay (Guaranteed Instant Offline/Local Rendering) -->
     <div id="map-overlay">
-        <svg id="usMapSvg" viewBox="0 0 960 600"></svg>
+        <svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+            <g id="us-states">
+                <!-- Pacific & Mountain -->
+                <path class="state-path" onclick="openStateModal('Washington')" d="M100,50 L180,55 L185,115 L105,110 Z" title="Washington"/>
+                <path class="state-path" onclick="openStateModal('Oregon')" d="M95,115 L185,120 L190,195 L90,190 Z" title="Oregon"/>
+                <path class="state-path" onclick="openStateModal('California')" d="M75,195 L145,210 L115,370 L60,320 Z" title="California"/>
+                <path class="state-path" onclick="openStateModal('Nevada')" d="M145,210 L210,215 L195,360 L115,350 Z" title="Nevada"/>
+                <path class="state-path" onclick="openStateModal('Idaho')" d="M185,120 L245,125 L235,245 L205,240 L195,195 Z" title="Idaho"/>
+                <path class="state-path" onclick="openStateModal('Utah')" d="M210,250 L285,255 L280,370 L200,365 Z" title="Utah"/>
+                <path class="state-path" onclick="openStateModal('Arizona')" d="M200,375 L285,380 L280,485 L195,480 Z" title="Arizona"/>
+                <path class="state-path" onclick="openStateModal('Montana')" d="M245,110 L375,115 L370,195 L245,190 Z" title="Montana"/>
+                <path class="state-path" onclick="openStateModal('Wyoming')" d="M245,200 L375,205 L370,285 L245,280 Z" title="Wyoming"/>
+                <path class="state-path" onclick="openStateModal('Colorado')" d="M245,290 L380,295 L375,395 L240,390 Z" title="Colorado"/>
+                <path class="state-path" onclick="openStateModal('New Mexico')" d="M240,400 L375,405 L370,515 L235,510 Z" title="New Mexico"/>
+                
+                <!-- Plains & Midwest -->
+                <path class="state-path" onclick="openStateModal('North Dakota')" d="M380,115 L490,120 L485,195 L375,190 Z" title="North Dakota"/>
+                <path class="state-path" onclick="openStateModal('South Dakota')" d="M380,200 L490,205 L485,285 L375,280 Z" title="South Dakota"/>
+                <path class="state-path" onclick="openStateModal('Nebraska')" d="M380,290 L505,295 L500,375 L375,370 Z" title="Nebraska"/>
+                <path class="state-path" onclick="openStateModal('Kansas')" d="M380,380 L510,385 L505,470 L375,465 Z" title="Kansas"/>
+                <path class="state-path" onclick="openStateModal('Oklahoma')" d="M380,475 L525,480 L520,545 L375,540 Z" title="Oklahoma"/>
+                <path class="state-path" onclick="openStateModal('Texas')" d="M385,550 L575,555 L555,435 L525,430 L525,545 Z" title="Texas"/>
+                <path class="state-path" onclick="openStateModal('Minnesota')" d="M490,125 L580,130 L575,235 L485,230 Z" title="Minnesota"/>
+                <path class="state-path" onclick="openStateModal('Iowa')" d="M505,240 L595,245 L590,325 L500,320 Z" title="Iowa"/>
+                <path class="state-path" onclick="openStateModal('Missouri')" d="M510,335 L605,340 L600,430 L505,425 Z" title="Missouri"/>
+                <path class="state-path" onclick="openStateModal('Arkansas')" d="M525,440 L615,445 L610,520 L520,515 Z" title="Arkansas"/>
+                <path class="state-path" onclick="openStateModal('Louisiana')" d="M525,525 L615,530 L610,600 L520,595 Z" title="Louisiana"/>
+                <path class="state-path" onclick="openStateModal('Wisconsin')" d="M585,150 L665,155 L660,260 L580,255 Z" title="Wisconsin"/>
+                <path class="state-path" onclick="openStateModal('Illinois')" d="M595,265 L665,270 L655,395 L590,390 Z" title="Illinois"/>
+                <path class="state-path" onclick="openStateModal('Michigan')" d="M635,170 L725,175 L720,285 L630,280 Z" title="Michigan"/>
+                <path class="state-path" onclick="openStateModal('Indiana')" d="M665,270 L715,275 L710,385 L660,380 Z" title="Indiana"/>
+                <path class="state-path" onclick="openStateModal('Ohio')" d="M715,265 L785,270 L780,375 L710,370 Z" title="Ohio"/>
+                <path class="state-path" onclick="openStateModal('Kentucky')" d="M625,395 L765,400 L755,465 L620,460 Z" title="Kentucky"/>
+                <path class="state-path" onclick="openStateModal('Tennessee')" d="M620,470 L775,475 L770,530 L615,525 Z" title="Tennessee"/>
+                <path class="state-path" onclick="openStateModal('Mississippi')" d="M615,535 L685,540 L680,630 L610,625 Z" title="Mississippi"/>
+                <path class="state-path" onclick="openStateModal('Alabama')" d="M685,535 L755,540 L750,630 L680,625 Z" title="Alabama"/>
+                
+                <!-- East Coast -->
+                <path class="state-path" onclick="openStateModal('Georgia')" d="M755,475 L835,480 L830,600 L750,595 Z" title="Georgia"/>
+                <path class="state-path" onclick="openStateModal('Florida')" d="M755,605 L875,610 L860,700 L745,695 Z" title="Florida"/>
+                <path class="state-path" onclick="openStateModal('North Carolina')" d="M780,385 L885,390 L880,465 L775,460 Z" title="North Carolina"/>
+                <path class="state-path" onclick="openStateModal('South Carolina')" d="M780,470 L865,475 L860,535 L775,530 Z" title="South Carolina"/>
+                <path class="state-path" onclick="openStateModal('Virginia')" d="M785,315 L885,320 L880,385 L780,380 Z" title="Virginia"/>
+                <path class="state-path" onclick="openStateModal('West Virginia')" d="M745,335 L805,340 L800,400 L740,395 Z" title="West Virginia"/>
+                <path class="state-path" onclick="openStateModal('Pennsylvania')" d="M790,265 L895,270 L890,340 L785,335 Z" title="Pennsylvania"/>
+                <path class="state-path" onclick="openStateModal('New York')" d="M810,185 L915,190 L910,275 L805,270 Z" title="New York"/>
+                <path class="state-path" onclick="openStateModal('Maryland')" d="M840,305 L895,310 L890,345 L835,340 Z" title="Maryland"/>
+                <path class="state-path" onclick="openStateModal('Delaware')" d="M895,305 L915,310 L910,345 L890,340 Z" title="Delaware"/>
+                <path class="state-path" onclick="openStateModal('New Jersey')" d="M895,265 L925,270 L920,335 L890,330 Z" title="New Jersey"/>
+                <path class="state-path" onclick="openStateModal('Connecticut')" d="M915,225 L945,230 L940,260 L910,255 Z" title="Connecticut"/>
+                <path class="state-path" onclick="openStateModal('Rhode Island')" d="M945,225 L965,230 L960,255 L940,250 Z" title="Rhode Island"/>
+                <path class="state-path" onclick="openStateModal('Massachusetts')" d="M915,195 L975,200 L970,230 L910,225 Z" title="Massachusetts"/>
+                <path class="state-path" onclick="openStateModal('Vermont')" d="M895,160 L925,165 L920,215 L890,210 Z" title="Vermont"/>
+                <path class="state-path" onclick="openStateModal('New Hampshire')" d="M925,155 L955,160 L950,210 L920,205 Z" title="New Hampshire"/>
+                <path class="state-path" onclick="openStateModal('Maine')" d="M945,115 L985,120 L980,195 L940,190 Z" title="Maine"/>
+                
+                <!-- Alaska & Hawaii (Inlay Insets) -->
+                <path class="state-path" onclick="openStateModal('Alaska')" d="M120,520 L210,525 L205,600 L115,595 Z" title="Alaska"/>
+                <path class="state-path" onclick="openStateModal('Hawaii')" d="M230,550 L310,555 L305,610 L225,605 Z" title="Hawaii"/>
+            </g>
+        </svg>
     </div>
 
     <div class="ui-overlay">
@@ -34,7 +94,7 @@
         <div class="hud-footer">
             <div class="telemetry-panel">
                 <strong>Sovereign Network Active</strong>
-                Accurate Geographic State Boundaries • 50 States & Capitals Ready for Citizen Access.
+                Self-Contained Local Vector Map • 50 States & Capitals Ready for Citizen Access.
             </div>
             <div class="fps-counter" id="fpsDisplay">50 States Active</div>
         </div>
@@ -49,79 +109,62 @@
         <button class="close-modal" onclick="closeStateModal()">Close Portal</button>
     </div>
 
-    <!-- Load TopoJSON for Accurate State Geographic Outlines -->
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://unpkg.com/topojson-client@3"></script>
-
     <script>
         const stateCapitalData = {
-            "Alabama": { capital: "Montgomery", x: 670, y: 420 },
-            "Alaska": { capital: "Juneau", x: 200, y: 520 },
-            "Arizona": { capital: "Phoenix", x: 180, y: 380 },
-            "Arkansas": { capital: "Little Rock", x: 540, y: 400 },
-            "California": { capital: "Sacramento", x: 95, y: 260 },
-            "Colorado": { capital: "Denver", x: 315, y: 280 },
-            "Connecticut": { capital: "Hartford", x: 875, y: 200 },
-            "Delaware": { capital: "Dover", x: 840, y: 270 },
-            "Florida": { capital: "Tallahassee", x: 740, y: 500 },
-            "Georgia": { capital: "Atlanta", x: 720, y: 410 },
-            "Hawaii": { capital: "Honolulu", x: 350, y: 550 },
-            "Idaho": { capital: "Boise", x: 170, y: 180 },
-            "Illinois": { capital: "Springfield", x: 580, y: 280 },
-            "Indiana": { capital: "Indianapolis", x: 630, y: 280 },
-            "Iowa": { capital: "Des Moines", x: 510, y: 240 },
-            "Kansas": { capital: "Topeka", x: 440, y: 320 },
-            "Kentucky": { capital: "Frankfort", x: 660, y: 315 },
-            "Louisiana": { capital: "Baton Rouge", x: 540, y: 470 },
-            "Maine": { capital: "Augusta", x: 910, y: 130 },
-            "Maryland": { capital: "Annapolis", x: 820, y: 275 },
-            "Massachusetts": { capital: "Boston", x: 885, y: 185 },
-            "Michigan": { capital: "Lansing", x: 660, y: 210 },
-            "Minnesota": { capital: "Saint Paul", x: 520, y: 160 },
-            "Mississippi": { capital: "Jackson", x: 580, y: 430 },
-            "Missouri": { capital: "Jefferson City", x: 520, y: 320 },
-            "Montana": { capital: "Helena", x: 260, y: 130 },
-            "Nebraska": { capital: "Lincoln", x: 415, y: 250 },
-            "Nevada": { capital: "Carson City", x: 130, y: 250 },
-            "New Hampshire": { capital: "Concord", x: 880, y: 160 },
-            "New Jersey": { capital: "Trenton", x: 845, y: 250 },
-            "New Mexico": { capital: "Santa Fe", x: 290, y: 380 },
-            "New York": { capital: "Albany", x: 850, y: 180 },
-            "North Carolina": { capital: "Raleigh", x: 790, y: 355 },
-            "North Dakota": { capital: "Bismarck", x: 400, y: 130 },
-            "Ohio": { capital: "Columbus", x: 700, y: 270 },
-            "Oklahoma": { capital: "Oklahoma City", x: 460, y: 380 },
-            "Oregon": { capital: "Salem", x: 100, y: 170 },
-            "Pennsylvania": { capital: "Harrisburg", x: 800, y: 250 },
-            "Rhode Island": { capital: "Providence", x: 890, y: 195 },
-            "South Carolina": { capital: "Columbia", x: 760, y: 390 },
-            "South Dakota": { capital: "Pierre", x: 400, y: 190 },
-            "Tennessee": { capital: "Nashville", x: 650, y: 355 },
-            "Texas": { capital: "Austin", x: 460, y: 480 },
-            "Utah": { capital: "Salt Lake City", x: 220, y: 260 },
-            "Vermont": { capital: "Montpelier", x: 860, y: 155 },
-            "Virginia": { capital: "Richmond", x: 800, y: 310 },
-            "Washington": { capital: "Olympia", x: 120, y: 100 },
-            "West Virginia": { capital: "Charleston", x: 730, y: 300 },
-            "Wisconsin": { capital: "Madison", x: 570, y: 200 },
-            "Wyoming": { capital: "Cheyenne", x: 310, y: 200 }
-        };
-
-        const stateFipsMap = {
-            "01": "Alabama", "02": "Alaska", "04": "Arizona", "05": "Arkansas", "06": "California",
-            "08": "Colorado", "09": "Connecticut", "10": "Delaware", "12": "Florida", "13": "Georgia",
-            "15": "Hawaii", "16": "Idaho", "17": "Illinois", "18": "Indiana", "19": "Iowa",
-            "20": "Kansas", "21": "Kentucky", "22": "Louisiana", "23": "Maine", "24": "Maryland",
-            "25": "Massachusetts", "26": "Michigan", "27": "Minnesota", "28": "Mississippi", "29": "Missouri",
-            "30": "Montana", "31": "Nebraska", "32": "Nevada", "33": "New Hampshire", "34": "New Jersey",
-            "35": "New Mexico", "36": "New York", "37": "North Carolina", "38": "North Dakota", "39": "Ohio",
-            "40": "Oklahoma", "41": "Oregon", "42": "Pennsylvania", "44": "Rhode Island", "45": "South Carolina",
-            "46": "South Dakota", "47": "Tennessee", "48": "Texas", "49": "Utah", "50": "Vermont",
-            "51": "Virginia", "53": "Washington", "54": "West Virginia", "55": "Wisconsin", "56": "Wyoming"
+            "Alabama": { capital: "Montgomery", x: 718, y: 580 },
+            "Alaska": { capital: "Juneau", x: 165, y: 560 },
+            "Arizona": { capital: "Phoenix", x: 240, y: 430 },
+            "Arkansas": { capital: "Little Rock", x: 570, y: 480 },
+            "California": { capital: "Sacramento", x: 95, y: 280 },
+            "Colorado": { capital: "Denver", x: 310, y: 340 },
+            "Connecticut": { capital: "Hartford", x: 928, y: 242 },
+            "Delaware": { capital: "Dover", x: 902, y: 325 },
+            "Florida": { capital: "Tallahassee", x: 810, y: 650 },
+            "Georgia": { capital: "Atlanta", x: 792, y: 540 },
+            "Hawaii": { capital: "Honolulu", x: 268, y: 580 },
+            "Idaho": { capital: "Boise", x: 210, y: 180 },
+            "Illinois": { capital: "Springfield", x: 625, y: 330 },
+            "Indiana": { capital: "Indianapolis", x: 687, y: 330 },
+            "Iowa": { capital: "Des Moines", x: 550, y: 282 },
+            "Kansas": { capital: "Topeka", x: 442, y: 425 },
+            "Kentucky": { capital: "Frankfort", x: 692, y: 430 },
+            "Louisiana": { capital: "Baton Rouge", x: 570, y: 562 },
+            "Maine": { capital: "Augusta", x: 962, y: 155 },
+            "Maryland": { capital: "Annapolis", x: 868, y: 325 },
+            "Massachusetts": { capital: "Boston", x: 942, y: 212 },
+            "Michigan": { capital: "Lansing", x: 677, y: 228 },
+            "Minnesota": { capital: "Saint Paul", x: 535, y: 180 },
+            "Mississippi": { capital: "Jackson", x: 647, y: 580 },
+            "Missouri": { capital: "Jefferson City", x: 555, y: 382 },
+            "Montana": { capital: "Helena", x: 310, y: 152 },
+            "Nebraska": { capital: "Lincoln", x: 442, y: 335 },
+            "Nevada": { capital: "Carson City", x: 162, y: 285 },
+            "New Hampshire": { capital: "Concord", x: 938, y: 182 },
+            "New Jersey": { capital: "Trenton", x: 908, y: 300 },
+            "New Mexico": { capital: "Santa Fe", x: 305, y: 455 },
+            "New York": { capital: "Albany", x: 860, y: 230 },
+            "North Carolina": { capital: "Raleigh", x: 832, y: 425 },
+            "North Dakota": { capital: "Bismarck", x: 435, y: 155 },
+            "Ohio": { capital: "Columbus", x: 747, y: 320 },
+            "Oklahoma": { capital: "Oklahoma City", x: 452, y: 510 },
+            "Oregon": { capital: "Salem", x: 140, y: 155 },
+            "Pennsylvania": { capital: "Harrisburg", x: 842, y: 302 },
+            "Rhode Island": { capital: "Providence", x: 952, y: 240 },
+            "South Carolina": { capital: "Columbia", x: 820, y: 502 },
+            "South Dakota": { capital: "Pierre", x: 435, y: 242 },
+            "Tennessee": { capital: "Nashville", x: 695, y: 500 },
+            "Texas": { capital: "Austin", x: 480, y: 495 },
+            "Utah": { capital: "Salt Lake City", x: 242, y: 310 },
+            "Vermont": { capital: "Montpelier", x: 908, y: 188 },
+            "Virginia": { capital: "Richmond", x: 832, y: 350 },
+            "Washington": { capital: "Olympia", x: 140, y: 85 },
+            "West Virginia": { capital: "Charleston", x: 772, y: 368 },
+            "Wisconsin": { capital: "Madison", x: 622, y: 205 },
+            "Wyoming": { capital: "Cheyenne", x: 310, y: 242 }
         };
 
         function openStateModal(stateName) {
-            const info = stateCapitalData[stateName] || { capital: "Capital", x: 0, y: 0 };
+            const info = stateCapitalData[stateName] || { capital: "Capital" };
             document.getElementById('modalStateName').innerText = stateName;
             document.getElementById('modalCapitalName').innerText = `Capital: ${info.capital}`;
             document.getElementById('modalDescription').innerText = `Official citizen resources, state portals, voter registration, and public offerings for the State of ${stateName}.`;
@@ -142,47 +185,19 @@
             document.getElementById('stateModal').classList.remove('active');
         }
 
-        // Render Accurate Geographic US Map using TopoJSON & D3
-        d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json").then(us => {
-            const svg = d3.select("#usMapSvg");
-            const path = d3.geoPath();
-
-            const statesGeo = topojson.feature(us, us.objects.states).features;
-
-            // Draw State Geographic Outlines
-            svg.selectAll("path")
-                .data(statesGeo)
-                .enter().append("path")
-                .attr("class", "state-path")
-                .attr("d", path)
-                .on("click", (event, d) => {
-                    const fips = String(d.id).padStart(2, '0');
-                    const stateName = stateFipsMap[fips];
-                    if (stateName) openStateModal(stateName);
-                })
-                .append("title")
-                .text(d => {
-                    const fips = String(d.id).padStart(2, '0');
-                    return stateFipsMap[fips] || "State";
-                });
-
-            // Render Capital Markers over Geographic Outlines
-            const capitalsContainer = document.getElementById('capitals-container');
-            const mapSvgElem = document.getElementById('usMapSvg');
-
-            Object.keys(stateCapitalData).forEach(stateName => {
-                const data = stateCapitalData[stateName];
-                const marker = document.createElement('div');
-                marker.className = 'capital-marker';
-                marker.innerHTML = `<span style="color:#F59E0B;">&#9733;</span> <span>${data.capital}</span>`;
-                
-                // Position relative to map viewBox (960x600)
-                marker.style.left = `${(data.x / 960) * 100}%`;
-                marker.style.top = `${(data.y / 600) * 100}%`;
-                
-                marker.addEventListener('click', () => openStateModal(stateName));
-                capitalsContainer.appendChild(marker);
-            });
+        // Render Capital Markers over Local SVG Map
+        const capitalsContainer = document.getElementById('capitals-container');
+        Object.keys(stateCapitalData).forEach(stateName => {
+            const data = stateCapitalData[stateName];
+            const marker = document.createElement('div');
+            marker.className = 'capital-marker';
+            marker.innerHTML = `<span style="color:#F59E0B;">&#9733;</span> <span>${data.capital}</span>`;
+            
+            marker.style.left = `${(data.x / 1000) * 100}%`;
+            marker.style.top = `${(data.y / 600) * 100}%`;
+            
+            marker.addEventListener('click', () => openStateModal(stateName));
+            capitalsContainer.appendChild(marker);
         });
 
         // Background Starfield Engine
