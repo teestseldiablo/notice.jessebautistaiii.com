@@ -1,6 +1,7 @@
 ﻿:root {
     --bg-deep: #030712;
     --old-glory-red: #DC2626;
+    --old-glory-blue: #1E3A8A;
     --pure-white: #FFFFFF;
     --gold: #F59E0B;
     --glass-bg: rgba(3, 7, 18, 0.85);
@@ -35,7 +36,42 @@ body, html {
     height: 100%;
     z-index: 2;
     pointer-events: none;
-    background: radial-gradient(circle at center, transparent 40%, rgba(3, 7, 18, 0.9) 90%);
+    background: radial-gradient(circle at center, transparent 30%, rgba(3, 7, 18, 0.92) 90%);
+}
+
+/* Geographic State Map Layer Overlay */
+#map-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    max-width: 1100px;
+    height: 70vh;
+    z-index: 5;
+    pointer-events: none;
+}
+
+#map-overlay svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.state-path {
+    fill: rgba(10, 25, 47, 0.65);
+    stroke: rgba(245, 158, 11, 0.4);
+    stroke-width: 1.25px;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: all 0.25s ease;
+}
+
+.state-path:hover {
+    fill: rgba(220, 38, 38, 0.4);
+    stroke: var(--gold);
+    stroke-width: 2.25px;
+    filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.6));
 }
 
 .ui-overlay {
@@ -62,7 +98,7 @@ header {
     padding: 1.25rem 2rem;
     border-radius: 12px;
     pointer-events: auto;
-    max-width: 580px;
+    max-width: 600px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
 }
 
@@ -104,22 +140,33 @@ nav a:hover {
     border-color: var(--old-glory-red);
 }
 
-.capital-label {
+.capital-marker {
     position: absolute;
-    color: #FFFFFF;
-    font-size: 11px;
-    font-weight: 700;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 12px rgba(245, 158, 11, 0.5);
-    pointer-events: auto;
-    cursor: pointer;
+    z-index: 8;
     transform: translate(-50%, -50%);
-    white-space: nowrap;
-    transition: transform 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(3, 7, 18, 0.75);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    transition: transform 0.2s ease, background 0.2s ease;
 }
 
-.capital-label:hover {
-    color: var(--gold);
+.capital-marker:hover {
+    background: rgba(220, 38, 38, 0.8);
     transform: translate(-50%, -50%) scale(1.15);
+    border-color: var(--gold);
+}
+
+.capital-marker span {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--pure-white);
+    white-space: nowrap;
 }
 
 /* State Resource Popup Modal */
@@ -220,8 +267,29 @@ nav a:hover {
 
 .hud-footer {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: flex-end;
     pointer-events: auto;
+}
+
+.telemetry-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border-glow);
+    border-left: 3px solid var(--gold);
+    padding: 1rem 1.5rem;
+    border-radius: 0 8px 8px 0;
+    max-width: 380px;
+    font-size: 0.75rem;
+    color: #CBD5E1;
+}
+
+.telemetry-panel strong {
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .fps-counter {
