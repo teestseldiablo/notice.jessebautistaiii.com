@@ -222,3 +222,17 @@ body, html {
     fill: #FFFFFF;
     transform: scale(1.4);
 }
+
+.map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    background: #030712;
+}
+
+.ol-attribution {
+    display: none !important;
+}
