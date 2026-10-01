@@ -300,15 +300,15 @@
             }
         });
 
-        // Add Historical Event Markers with White House Icon
+        // Add Historical Event Markers with THE Executive White House Icon
         historicalEvents.forEach(evt => {
             const feature = new ol.Feature({
                 geometry: new ol.geom.Point(ol.proj.fromLonLat(evt.coords)),
                 title: evt.name,
                 detail: `Historical Landmark (${evt.year})`,
-                description: evt.description,
-                wikidataUrl: evt.wikidata,
-                isHistory: true
+                    description: evt.description,
+                    wikidataUrl: evt.wikidata,
+                    isHistory: true
             });
 
             feature.setStyle(new ol.style.Style({
@@ -316,8 +316,8 @@
                     anchor: [0.5, 0.5],
                     anchorXUnits: 'fraction',
                     anchorYUnits: 'fraction',
-                    src: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="26" height="26"><circle cx="12" cy="12" r="10" fill="%231D4ED8" stroke="%23FFFFFF" stroke-width="1.5"/><path d="M12 7l-5 4v7h10v-7l-5-4zM9 18v-4h6v4H9z" fill="%23FFFFFF"/></svg>',
-                    scale: 1.1
+                    src: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28"><circle cx="12" cy="12" r="11" fill="%231D4ED8" stroke="%23FFFFFF" stroke-width="1.5"/><path d="M12 4c-.8 0-1.5.7-1.5 1.5V7H6v1h12V7h-4.5V5.5C13.5 4.7 12.8 4 12 4zm-5 6v7h2v-5h6v5h2v-7H7z" fill="%23FFFFFF"/></svg>',
+                    scale: 1.15
                 })
             }));
 
