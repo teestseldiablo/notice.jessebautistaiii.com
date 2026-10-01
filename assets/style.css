@@ -1,91 +1,88 @@
-
-body {
-    font-family: 'Inter', sans-serif;
+﻿body, html {
     margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
-    background: #030712;
-    color: #F9FAFB;
+    font-family: 'Inter', sans-serif;
+    background-color: #030712;
+    color: #F3F4F6;
 }
 
 #canvas-container {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     z-index: 1;
+    pointer-events: none;
 }
 
 .map {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     z-index: 2;
-    background: transparent;
-    opacity: 0.60;
-    mix-blend-mode: screen;
+    opacity: 0.85;
 }
 
 .site-header {
-    position: fixed;
+    position: absolute;
     top: 20px;
     left: 20px;
     z-index: 10;
     background: rgba(3, 7, 18, 0.85);
-    padding: 12px 20px;
+    padding: 15px 25px;
     border-radius: 8px;
     border: 1px solid rgba(245, 158, 11, 0.3);
     backdrop-filter: blur(8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 
 .site-header h1 {
     font-family: 'Cinzel', serif;
-    font-size: 1.15rem;
+    font-size: 1.25rem;
+    margin: 0 0 5px 0;
     color: #F59E0B;
-    margin: 0;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
 }
 
 .site-header p {
     font-size: 0.8rem;
+    margin: 0;
     color: #9CA3AF;
-    margin: 4px 0 0 0;
 }
 
 .site-header a {
     color: #60A5FA;
     text-decoration: none;
 }
-
 .site-header a:hover {
     text-decoration: underline;
 }
 
-/* State Modal with Enhanced 4D Waving Flag Background */
+/* Upgraded State Modal for Deep Dives */
 .state-modal {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.9);
-    width: 420px;
-    background: rgba(3, 7, 18, 0.90);
-    border: 1px solid rgba(245, 158, 11, 0.45);
-    border-radius: 12px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 40px rgba(245, 158, 11, 0.2);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    overflow: hidden;
-    backdrop-filter: blur(12px);
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
 .state-modal.active {
     opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
 }
 
 .flag-bg-container {
@@ -94,117 +91,120 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
-    opacity: 0.35; /* Increased opacity so the red, white, and blue colors are clearly visible */
     overflow: hidden;
-    pointer-events: none;
-    mix-blend-mode: luminosity;
+    z-index: 1;
 }
 
 .waving-flag {
-    width: 160%;
-    height: 160%;
-    position: absolute;
-    top: -30%;
-    left: -30%;
-    animation: flagWave 7s ease-in-out infinite alternate;
-}
-
-@keyframes flagWave {
-    0% {
-        transform: perspective(500px) rotateY(-10deg) rotateX(6deg) scale(1.05);
-    }
-    50% {
-        transform: perspective(500px) rotateY(10deg) rotateX(-6deg) scale(1.12);
-    }
-    100% {
-        transform: perspective(500px) rotateY(-10deg) rotateX(6deg) scale(1.05);
-    }
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.18;
+    filter: contrast(1.2);
 }
 
 .modal-content-wrapper {
     position: relative;
     z-index: 2;
-    padding: 32px;
-    text-align: center;
-    background: linear-gradient(135deg, rgba(3, 7, 18, 0.85) 0%, rgba(15, 23, 42, 0.75) 100%);
+    background: rgba(10, 15, 30, 0.95);
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    border-radius: 12px;
+    width: 90%;
+    max-width: 650px;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 30px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(12px);
 }
 
-.state-modal h2 {
+.modal-content-wrapper h2 {
     font-family: 'Cinzel', serif;
-    font-size: 1.8rem;
-    color: #FFFFFF;
-    margin: 0 0 6px 0;
+    color: #F59E0B;
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 5px;
+    text-transform: uppercase;
     letter-spacing: 0.05em;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.6);
 }
 
-.state-modal h3 {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
+.modal-content-wrapper h3 {
+    font-size: 0.9rem;
+    color: #93C5FD;
+    margin-top: 0;
+    margin-bottom: 15px;
     font-weight: 500;
-    color: #F59E0B;
-    margin: 0 0 24px 0;
-    letter-spacing: 0.03em;
+}
+
+.modal-img-container {
+    width: 100%;
+    height: 220px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #E5E7EB;
+    margin-bottom: 20px;
+}
+
+.citation-tag {
+    font-size: 0.75rem;
+    color: #9CA3AF;
+    font-style: italic;
+    margin-bottom: 20px;
+    border-left: 2px solid #F59E0B;
+    padding-left: 10px;
 }
 
 .resource-links {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 .resource-btn {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(15, 23, 42, 0.85);
-    border: 1px solid rgba(245, 158, 11, 0.3);
-    color: #E5E7EB;
-    padding: 12px 16px;
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 15px;
     border-radius: 6px;
+    color: #F3F4F6;
     text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-size: 0.85rem;
     transition: all 0.2s ease;
 }
 
 .resource-btn:hover {
-    background: rgba(30, 41, 59, 0.95);
-    border-color: #F59E0B;
-    color: #FFFFFF;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+    background: rgba(37, 99, 235, 0.4);
+    border-color: rgba(59, 130, 246, 0.5);
 }
 
 .close-modal {
-    background: transparent;
-    border: 1px solid rgba(156, 163, 175, 0.4);
-    color: #9CA3AF;
-    padding: 10px 24px;
+    width: 100%;
+    background: #1E3A8A;
+    color: white;
+    border: none;
+    padding: 12px;
     border-radius: 6px;
-    font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    transition: background 0.2s;
 }
 
 .close-modal:hover {
-    background: rgba(239, 68, 68, 0.15);
-    border-color: #EF4444;
-    color: #FCA5A5;
-}
-
-.ol-attribution {
-    display: none !important;
-}
-
-.modal-desc {
-    font-size: 0.9rem;
-    color: #9CA3AF;
-    margin: 0 0 20px 0;
-    line-height: 1.4;
+    background: #1D4ED8;
 }
