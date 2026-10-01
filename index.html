@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unreal Engine Grade 3D/4D Sovereign Starfield | notice.jessebautistaiii.com</title>
+    <title>American Citizen State Resources | notice.jessebautistaiii.com</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -14,27 +14,33 @@
 
     <div class="ui-overlay">
         <header>
-            <h1>Sovereign 3D/4D Starfield & State Capitals</h1>
-            <p>AAA Cinematic Niagara Particle Simulation &bull; 50 Alphabetical Capitals &bull; Volumetric Bloom</p>
+            <h1>American Citizen Portal</h1>
+            <p>Select any state capital below to access official citizen resources, services, and state offerings.</p>
             <nav>
-                <a href="index.html">Cinematic View</a>
-                <a href="rights.html">History, Flag & Rights</a>
+                <a href="index.html">Interactive Map</a>
+                <a href="rights.html">Constitutional Rights & Flag</a>
             </nav>
         </header>
 
         <div id="labels-container"></div>
 
         <div class="hud-footer">
-            <div class="telemetry-panel">
-                <strong>Engine Telemetry</strong>
-                Active Raymarching Pipeline • 50 State Boundary Geometries Loaded • Real-Time 4D Temporal Drift Enabled.
-            </div>
-            <div class="fps-counter" id="fpsDisplay">FPS: 60 | NODES: 550</div>
+            <div class="fps-counter" id="fpsDisplay">50 States Active</div>
         </div>
     </div>
 
+    <!-- State Resource Popup Modal -->
+    <div class="state-modal" id="stateModal">
+        <h2 id="modalStateName">State Name</h2>
+        <h3 id="modalCapitalName">Capital: City</h3>
+        <p id="modalDescription">Access official state portals, citizen benefits, business registries, and public services.</p>
+        <div class="resource-links" id="modalLinks">
+            <!-- Dynamically populated links -->
+        </div>
+        <button class="close-modal" onclick="closeStateModal()">Close Portal</button>
+    </div>
+
     <script>
-        // 50 United States Capitals strictly sorted in ALPHABETICAL ORDER by Capital Name
         const capitals = [
             { state: "New York", capital: "Albany", x: -320, y: 160, z: 25 },
             { state: "Maryland", capital: "Annapolis", x: -250, y: 80, z: 15 },
@@ -91,7 +97,6 @@
         const canvas = document.getElementById('engineCanvas');
         const ctx = canvas.getContext('2d');
         const labelsContainer = document.getElementById('labels-container');
-        const fpsDisplay = document.getElementById('fpsDisplay');
 
         let width = window.innerWidth;
         let height = window.innerHeight;
@@ -105,148 +110,133 @@
             canvas.height = height;
         });
 
-        // Mouse Parallax tracking
         let mouseX = 0;
         let mouseY = 0;
         let targetMouseX = 0;
         let targetMouseY = 0;
 
         window.addEventListener('mousemove', (e) => {
-            targetMouseX = (e.clientX - width / 2) * 0.0008;
-            targetMouseY = (e.clientY - height / 2) * 0.0008;
+            targetMouseX = (e.clientX - width / 2) * 0.0006;
+            targetMouseY = (e.clientY - height / 2) * 0.0006;
         });
 
-        // AAA Niagara Sparkle Particle System (Multi-layered 4D depth)
-        const particleCount = 500;
+        // Cinematic Sparkle Particles
         const particles = [];
-        for (let i = 0; i < particleCount; i++) {
+        for (let i = 0; i < 400; i++) {
             particles.push({
-                x: (Math.random() - 0.5) * width * 2.5,
-                y: (Math.random() - 0.5) * height * 2.5,
-                z: Math.random() * 1000 - 500,
-                vx: (Math.random() - 0.5) * 0.3,
-                vy: (Math.random() - 0.5) * 0.3,
-                vz: (Math.random() - 0.5) * 0.6,
-                size: Math.random() * 2.5 + 0.8,
-                pulseSpeed: Math.random() * 0.05 + 0.02,
+                x: (Math.random() - 0.5) * width * 2,
+                y: (Math.random() - 0.5) * height * 2,
+                z: Math.random() * 800 - 400,
+                vx: (Math.random() - 0.5) * 0.2,
+                vy: (Math.random() - 0.5) * 0.2,
+                vz: (Math.random() - 0.5) * 0.4,
+                size: Math.random() * 2 + 0.5,
                 pulseOffset: Math.random() * Math.PI * 2
             });
         }
 
-        // Initialize Capital DOM Labels
-        const labelElements = capitals.map((item, idx) => {
+        // Modal Logic
+        function openStateModal(stateData) {
+            document.getElementById('modalStateName').innerText = stateData.state;
+            document.getElementById('modalCapitalName').innerText = `Capital: ${stateData.capital}`;
+            document.getElementById('modalDescription').innerText = `Official resources, citizen services, voter portals, and economic opportunities offered by the State of ${stateData.state}.`;
+            
+            const linksContainer = document.getElementById('modalLinks');
+            const stateSlug = stateData.state.toLowerCase().replace(/\s+/g, '');
+            
+            linksContainer.innerHTML = `
+                <a class="resource-btn" href="https://www.${stateSlug}.gov" target="_blank"><span>Official State Portal (.gov)</span> &rarr;</a>
+                <a class="resource-btn" href="https://www.usa.gov/state-swm" target="_blank"><span>Citizen Services & Benefits</span> &rarr;</a>
+                <a class="resource-btn" href="https://www.vote.org" target="_blank"><span>Voter Registration & Elections</span> &rarr;</a>
+            `;
+
+            document.getElementById('stateModal').classList.add('active');
+        }
+
+        function closeStateModal() {
+            document.getElementById('stateModal').classList.remove('active');
+        }
+
+        // Initialize Clickable Capital DOM Labels
+        const labelElements = capitals.map((item) => {
             const div = document.createElement('div');
             div.className = 'capital-label';
-            div.innerHTML = `<span style="color:#F59E0B; text-shadow: 0 0 8px #F59E0B;">&#9733;</span> ${item.capital} <span style="opacity:0.7; font-size:9px;">(${item.state})</span>`;
+            div.innerHTML = `<span style="color:#F59E0B;">&#9733;</span> ${item.capital} <span style="opacity:0.6; font-size:9px;">(${item.state})</span>`;
+            div.addEventListener('click', () => openStateModal(item));
             labelsContainer.appendChild(div);
             return { element: div, data: item };
         });
 
         let angleY = 0;
-        let frameCount = 0;
-        let fpsTimer = 0;
 
         function render(currentTime) {
-            // Calculate FPS
-            frameCount++;
-            if (currentTime - fpsTimer > 1000) {
-                fpsDisplay.innerText = `FPS: ${frameCount} | NODES: ${particles.length + capitals.length}`;
-                frameCount = 0;
-                fpsTimer = currentTime;
-            }
-
-            // Smooth mouse interpolation
             mouseX += (targetMouseX - mouseX) * 0.05;
             mouseY += (targetMouseY - mouseY) * 0.05;
 
-            // Clear frame with cinematic deep-space tint
             ctx.fillStyle = '#030712';
             ctx.fillRect(0, 0, width, height);
 
-            // Enable Additive Blending for Unreal Engine-grade Bloom / Glow
             ctx.globalCompositeOperation = 'lighter';
+            angleY += 0.0008 + mouseX * 0.15;
 
-            angleY += 0.0012 + mouseX * 0.2;
-
-            // Render 4D Drifting Niagara Particles
             particles.forEach(p => {
                 p.x += p.vx;
                 p.y += p.vy;
                 p.z += p.vz;
 
-                if (p.z < -500) p.z = 500;
-                if (p.z > 500) p.z = -500;
-                if (p.x < -width * 1.2) p.x = width * 1.2;
-                if (p.x > width * 1.2) p.x = -width * 1.2;
-                if (p.y < -height * 1.2) p.y = height * 1.2;
-                if (p.y > height * 1.2) p.y = -height * 1.2;
+                if (p.z < -400) p.z = 400;
+                if (p.z > 400) p.z = -400;
 
                 const fov = 450;
                 const scale = fov / (fov + p.z);
-                const px = width / 2 + p.x * scale + mouseX * 200;
-                const py = height / 2 + p.y * scale + mouseY * 200;
+                const px = width / 2 + p.x * scale;
+                const py = height / 2 + p.y * scale;
 
                 if (px >= 0 && px <= width && py >= 0 && py <= height) {
-                    const currentAlpha = Math.max(0.1, (p.z + 500) / 1000) * (0.6 + Math.sin(currentTime * 0.003 + p.pulseOffset) * 0.4);
-                    
                     ctx.save();
-                    ctx.globalAlpha = currentAlpha;
+                    ctx.globalAlpha = Math.max(0.1, (p.z + 400) / 800) * 0.5;
                     ctx.fillStyle = p.z > 0 ? '#F59E0B' : '#38BDF8';
                     ctx.beginPath();
-                    ctx.arc(px, py, p.size * scale * (1 + Math.sin(currentTime * p.pulseSpeed + p.pulseOffset) * 0.3), 0, Math.PI * 2);
+                    ctx.arc(px, py, p.size * scale, 0, Math.PI * 2);
                     ctx.fill();
                     ctx.restore();
                 }
             });
 
-            // Revert composite operation for crisp UI geometry
             ctx.globalCompositeOperation = 'source-over';
 
-            // Render State Capital Geometries & Volumetric Boundary Rings
-            labelElements.forEach((item, idx) => {
+            labelElements.forEach((item) => {
                 const itemData = item.data;
-
-                // 3D rotation matrix calculation
                 const cos = Math.cos(angleY);
                 const sin = Math.sin(angleY);
                 const rx = itemData.x * cos - itemData.z * sin;
                 const rz = itemData.x * sin + itemData.z * cos;
 
                 const fov = 550;
-                const scale = fov / (fov + rz + 350);
-                const screenX = width / 2 + rx * scale + mouseX * 100;
-                const screenY = height / 2 + (itemData.y + mouseY * 300) * scale;
+                const scale = fov / (fov + rz + 300);
+                const screenX = width / 2 + rx * scale;
+                const screenY = height / 2 + itemData.y * scale;
 
                 if (scale > 0) {
                     ctx.save();
-                    
-                    // Volumetric State Boundary Ring with Glow
                     ctx.strokeStyle = '#F59E0B';
-                    ctx.lineWidth = 1.75;
+                    ctx.lineWidth = 1.5;
                     ctx.shadowColor = '#F59E0B';
-                    ctx.shadowBlur = 12;
-                    ctx.globalAlpha = 0.65;
+                    ctx.shadowBlur = 10;
+                    ctx.globalAlpha = 0.6;
                     ctx.beginPath();
-                    ctx.arc(screenX, screenY, 20 * scale, 0, Math.PI * 2);
+                    ctx.arc(screenX, screenY, 18 * scale, 0, Math.PI * 2);
                     ctx.stroke();
 
-                    // Capital Star Node
-                    ctx.fillStyle = idx % 2 === 0 ? '#DC2626' : '#1E3A8A';
-                    ctx.strokeStyle = '#F59E0B';
-                    ctx.lineWidth = 2.5;
-                    ctx.shadowColor = '#DC2626';
-                    ctx.shadowBlur = 15;
+                    ctx.fillStyle = '#DC2626';
                     ctx.beginPath();
-                    ctx.arc(screenX, screenY, 6.5 * scale, 0, Math.PI * 2);
+                    ctx.arc(screenX, screenY, 5 * scale, 0, Math.PI * 2);
                     ctx.fill();
-                    ctx.stroke();
-
                     ctx.restore();
 
-                    // Position crisp DOM Label above capital star
                     item.element.style.left = `${screenX}px`;
-                    item.element.style.top = `${screenY - 24}px`;
-                    item.element.style.opacity = Math.min(1, Math.max(0.15, scale * 1.2));
+                    item.element.style.top = `${screenY - 22}px`;
+                    item.element.style.opacity = Math.min(1, Math.max(0.2, scale * 1.2));
                 } else {
                     item.element.style.opacity = 0;
                 }

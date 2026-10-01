@@ -1,12 +1,9 @@
 ﻿:root {
     --bg-deep: #030712;
-    --navy-blue: #0A192F;
-    --old-glory-blue: #1E3A8A;
     --old-glory-red: #DC2626;
     --pure-white: #FFFFFF;
     --gold: #F59E0B;
-    --gold-glow: rgba(245, 158, 11, 0.4);
-    --glass-bg: rgba(3, 7, 18, 0.75);
+    --glass-bg: rgba(3, 7, 18, 0.85);
     --border-glow: rgba(245, 158, 11, 0.3);
 }
 
@@ -38,7 +35,7 @@ body, html {
     height: 100%;
     z-index: 2;
     pointer-events: none;
-    background: radial-gradient(circle at center, transparent 40%, rgba(3, 7, 18, 0.85) 90%);
+    background: radial-gradient(circle at center, transparent 40%, rgba(3, 7, 18, 0.9) 90%);
 }
 
 .ui-overlay {
@@ -52,7 +49,7 @@ body, html {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 2.5rem;
+    padding: 2rem;
     box-sizing: border-box;
 }
 
@@ -62,16 +59,16 @@ header {
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--border-glow);
     border-top: 3px solid var(--old-glory-red);
-    padding: 1.5rem 2rem;
+    padding: 1.25rem 2rem;
     border-radius: 12px;
     pointer-events: auto;
-    max-width: 650px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(220, 38, 38, 0.15);
+    max-width: 580px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
 }
 
 header h1 {
-    margin: 0 0 0.4rem 0;
-    font-size: 1.6rem;
+    margin: 0 0 0.3rem 0;
+    font-size: 1.4rem;
     font-weight: 800;
     letter-spacing: -0.01em;
     color: var(--pure-white);
@@ -79,10 +76,10 @@ header h1 {
 }
 
 header p {
-    margin: 0 0 1rem 0;
+    margin: 0 0 0.8rem 0;
     color: #94A3B8;
-    font-size: 0.85rem;
-    letter-spacing: 0.03em;
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
 }
 
 nav {
@@ -99,67 +96,141 @@ nav a {
     letter-spacing: 0.1em;
     border-bottom: 2px solid transparent;
     padding-bottom: 0.2rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
 }
 
 nav a:hover {
     color: var(--pure-white);
     border-color: var(--old-glory-red);
-    text-shadow: 0 0 10px var(--gold);
-}
-
-.hud-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    pointer-events: auto;
-    width: 100%;
-}
-
-.telemetry-panel {
-    background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--border-glow);
-    border-left: 3px solid var(--gold);
-    padding: 1.25rem 1.75rem;
-    border-radius: 0 12px 12px 0;
-    max-width: 420px;
-    font-size: 0.8rem;
-    color: #CBD5E1;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-}
-
-.telemetry-panel strong {
-    color: var(--gold);
-    display: block;
-    margin-bottom: 0.35rem;
-    font-size: 0.85rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-}
-
-.fps-counter {
-    background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    border: 1px solid var(--border-glow);
-    padding: 0.75rem 1.25rem;
-    border-radius: 8px;
-    font-family: monospace;
-    font-size: 0.8rem;
-    color: var(--gold);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .capital-label {
     position: absolute;
     color: #FFFFFF;
     font-size: 11px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     font-weight: 700;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 12px rgba(245, 158, 11, 0.5);
-    pointer-events: none;
+    pointer-events: auto;
+    cursor: pointer;
     transform: translate(-50%, -50%);
     white-space: nowrap;
-    transition: opacity 0.15s ease;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.capital-label:hover {
+    color: var(--gold);
+    transform: translate(-50%, -50%) scale(1.15);
+}
+
+/* State Resource Popup Modal */
+.state-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background: rgba(10, 25, 47, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-glow);
+    border-top: 4px solid var(--old-glory-red);
+    padding: 2rem;
+    border-radius: 16px;
+    z-index: 100;
+    width: 90%;
+    max-width: 480px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.9), 0 0 40px rgba(245, 158, 11, 0.2);
+    display: none;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: auto;
+}
+
+.state-modal.active {
+    display: block;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.state-modal h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    color: var(--pure-white);
+    text-transform: uppercase;
+}
+
+.state-modal h3 {
+    margin: 0 0 1rem 0;
+    font-size: 0.9rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.state-modal p {
+    color: #CBD5E1;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+.resource-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.resource-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--pure-white);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.resource-btn:hover {
+    background: var(--gold);
+    color: #030712;
+    border-color: var(--gold);
+}
+
+.close-modal {
+    background: var(--old-glory-red);
+    color: var(--pure-white);
+    border: none;
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: opacity 0.2s ease;
+}
+
+.close-modal:hover {
+    opacity: 0.85;
+}
+
+.hud-footer {
+    display: flex;
+    justify-content: flex-end;
+    pointer-events: auto;
+}
+
+.fps-counter {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border-glow);
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: var(--gold);
 }
