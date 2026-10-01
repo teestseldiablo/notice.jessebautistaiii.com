@@ -3,62 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>American Citizen Portal | Public Notice & Knowledge Base</title>
+    <title>American Citizen Portal | Comprehensive Historical & Geographic Registry</title>
     
     <!-- Custom American Flag Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 740 390'><rect width='740' height='390' fill='%23bf0a30'/><g fill='%23fff'><rect y='30' width='740' height='30'/><rect y='90' width='740' height='30'/><rect y='150' width='740' height='30'/><rect y='210' width='740' height='30'/><rect y='270' width='740' height='30'/><rect y='330' width='740' height='30'/></g><rect width='296' height='210' fill='%23002868'/></svg>">
 
     <!-- SEO & Metadata Optimization -->
-    <meta name="description" content="Public citizen portal and knowledge base providing geographic data, state capital registries, and historical American events dating back to the 1700s. Created and maintained by Jesse Bautista III.">
+    <meta name="description" content="Comprehensive public citizen portal featuring major American history milestones from 1700 to the present, state capital registries, and public documents. Maintained by Jesse Bautista III.">
     <meta name="author" content="Jesse Bautista III">
     <link rel="canonical" href="https://notice.jessebautistaiii.com">
 
     <!-- Open Graph / Social SEO -->
-    <meta property="og:title" content="American Citizen Portal | Public Notice">
-    <meta property="og:description" content="Public knowledge base and interactive geographic registry of US state capitals and historical milestones.">
+    <meta property="og:title" content="American Citizen Portal | History & Registry">
+    <meta property="og:description" content="Interactive map of major American historical events from 1700 to present and state capital portals.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://notice.jessebautistaiii.com">
     <meta property="og:site_name" content="American Citizen Portal">
-
-    <!-- Dublin Core Metadata -->
-    <meta name="DC.title" content="American Citizen Portal">
-    <meta name="DC.creator" content="Jesse Bautista III">
-    <meta name="DC.publisher" content="Jesse Bautista III">
-    <meta name="DC.type" content="Interactive Resource">
-    <meta name="DC.format" content="text/html">
-    <meta name="DC.language" content="en">
-
-    <!-- JSON-LD Structured Data (Schema.org & Wikidata Integration) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "American Citizen Portal",
-      "url": "https://notice.jessebautistaiii.com",
-      "author": {
-        "@type": "Person",
-        "name": "Jesse Bautista III",
-        "url": "https://jessebautistaiii.com"
-      },
-      "about": [
-        {
-          "@type": "Thing",
-          "name": "United States State Capitals",
-          "sameAs": "https://www.wikidata.org/wiki/Q35472"
-        },
-        {
-          "@type": "Thing",
-          "name": "American History",
-          "sameAs": "https://www.wikidata.org/wiki/Q1115"
-        },
-        {
-          "@type": "Thing",
-          "name": "Public Notice",
-          "sameAs": "https://www.wikidata.org/wiki/Q7257917"
-        }
-      ]
-    }
-    </script>
 
     <!-- Google Fonts: Cinzel & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,7 +39,7 @@
 
     <header class="site-header">
         <h1>American Citizen Portal</h1>
-        <p>Public Knowledge Registry &mdash; Maintained by <a href="https://jessebautistaiii.com" target="_blank" rel="author">Jesse Bautista III</a></p>
+        <p>1700&ndash;Present Historical Registry &mdash; Maintained by <a href="https://jessebautistaiii.com" target="_blank" rel="author">Jesse Bautista III</a></p>
     </header>
 
     <!-- Upgraded State Modal with 4D Waving American Flag Background -->
@@ -155,13 +115,20 @@
             "Wisconsin": [-89.4012, 43.0731], "Wyoming": [-104.8202, 41.1400]
         };
 
-        // Major American Historical Events dating back to the 1700s
+        // Comprehensive American Historical Events (1700 to Present)
         const historicalEvents = [
+            {
+                name: "Salem Witch Trials (1792)",
+                coords: [-70.8953, 42.5195],
+                year: "1692–1702",
+                description: "A series of hearings and prosecutions of people accused of witchcraft in colonial Massachusetts.",
+                wikidata: "https://www.wikidata.org/wiki/Q184485"
+            },
             {
                 name: "Boston Tea Party (1773)",
                 coords: [-71.0589, 42.3601],
                 year: "1773",
-                description: "Political protest by the Sons of Liberty in Boston, Massachusetts, against tax policy.",
+                description: "Political protest by the Sons of Liberty in Boston against British tea tax policies.",
                 wikidata: "https://www.wikidata.org/wiki/Q18341"
             },
             {
@@ -175,8 +142,50 @@
                 name: "Yorktown Battlefield (1781)",
                 coords: [-76.5126, 37.2388],
                 year: "1781",
-                description: "Site of the decisive victory by American and French forces that effectively ended the Revolutionary War.",
+                description: "Decisive victory by American and French forces that effectively ended the Revolutionary War.",
                 wikidata: "https://www.wikidata.org/wiki/Q387431"
+            },
+            {
+                name: "Constitutional Convention (1787)",
+                coords: [-75.1503, 39.9489],
+                year: "1787",
+                description: "Convention in Philadelphia addressing problems in governing the United States of America.",
+                wikidata: "https://www.wikidata.org/wiki/Q651275"
+            },
+            {
+                name: "Louisiana Purchase Treaty (1803)",
+                coords: [-90.0715, 29.9511],
+                year: "1803",
+                description: "The acquisition of the territory of Louisiana by the United States from the French Republic in New Orleans.",
+                wikidata: "https://www.wikidata.org/wiki/Q11029"
+            },
+            {
+                name: "Erie Canal Opening (1825)",
+                coords: [-73.7562, 42.6526],
+                year: "1825",
+                description: "Connecting the Great Lakes to New York City, fueling massive westward expansion and trade.",
+                wikidata: "https://www.wikidata.org/wiki/Q51532"
+            },
+            {
+                name: "Battle of the Alamo (1836)",
+                coords: [-98.4861, 29.4259],
+                year: "1836",
+                description: "Pivotal event in the Texas Revolution in San Antonio, Texas.",
+                wikidata: "https://www.wikidata.org/wiki/Q187836"
+            },
+            {
+                name: "California Gold Rush (1848)",
+                coords: [-120.8958, 38.9058],
+                year: "1848",
+                description: "Gold found at Sutter's Mill in Coloma, California, sparking mass migration across the continent.",
+                wikidata: "https://www.wikidata.org/wiki/Q105658"
+            },
+            {
+                name: "Fort Sumter (1861)",
+                coords: [-79.8746, 32.7523],
+                year: "1861",
+                description: "Site of the bombardment that initiated the American Civil War in Charleston harbor, South Carolina.",
+                wikidata: "https://www.wikidata.org/wiki/Q614838"
             },
             {
                 name: "Gettysburg Battlefield (1863)",
@@ -186,11 +195,53 @@
                 wikidata: "https://www.wikidata.org/wiki/Q33132"
             },
             {
+                name: "Transcontinental Railroad Completion (1869)",
+                coords: [-112.7247, 41.6258],
+                year: "1869",
+                description: "Promontory Summit, Utah: Driving of the Golden Spike connecting eastern and western rail networks.",
+                wikidata: "https://www.wikidata.org/wiki/Q849925"
+            },
+            {
                 name: "Kitty Hawk, First Flight (1903)",
                 coords: [-75.7441, 36.0792],
                 year: "1903",
-                description: "Site where the Wright brothers successfully achieved the first controlled, sustained powered heavier-than-air flight.",
+                description: "Site where the Wright brothers achieved the first controlled, sustained powered heavier-than-air flight.",
                 wikidata: "https://www.wikidata.org/wiki/Q126154"
+            },
+            {
+                name: "Pearl Harbor Attack (1941)",
+                coords: [-157.9504, 21.3649],
+                year: "1941",
+                description: "Surprise military strike upon the United States naval base in Honolulu, Hawaii by the Empire of Japan.",
+                wikidata: "https://www.wikidata.org/wiki/Q7390"
+            },
+            {
+                name: "Trinity Site, First Atomic Test (1945)",
+                coords: [-106.4777, 33.6773],
+                year: "1945",
+                description: "First detonation of a nuclear weapon, conducted by the United States Army in New Mexico.",
+                wikidata: "https://www.wikidata.org/wiki/Q651268"
+            },
+            {
+                name: "March on Washington (1963)",
+                coords: [-77.0365, 38.8895],
+                year: "1963",
+                description: "Massive civil rights protest where Martin Luther King Jr. delivered his 'I Have a Dream' speech in Washington, D.C.",
+                wikidata: "https://www.wikidata.org/wiki/Q923363"
+            },
+            {
+                name: "Apollo 11 Moon Landing Launch (1969)",
+                coords: [-80.6041, 28.6082],
+                year: "1969",
+                description: "Kennedy Space Center, Florida: Launch of Apollo 11, landing the first humans on the Moon.",
+                wikidata: "https://www.wikidata.org/wiki/Q43555"
+            },
+            {
+                name: "World Trade Center Site (2001)",
+                coords: [-74.0134, 40.7115],
+                year: "2001",
+                description: "New York City: Site of the September 11 terrorist attacks, shaping modern American security and defense.",
+                wikidata: "https://www.wikidata.org/wiki/Q11256"
             }
         ];
 
@@ -249,7 +300,7 @@
             }
         });
 
-        // Add Major Historical Event Markers (Distinct Blue/Crimson Monument Shields)
+        // Add Comprehensive Historical Event Markers (Distinct Blue Monument Icons)
         historicalEvents.forEach(evt => {
             const feature = new ol.Feature({
                 geometry: new ol.geom.Point(ol.proj.fromLonLat(evt.coords)),
