@@ -183,3 +183,14 @@ body, html {
 .close-modal:hover {
     opacity: 0.85;
 }
+
+.capital-star-svg {
+    fill: #F59E0B;
+    filter: drop-shadow(0 0 3px rgba(245, 158, 11, 0.9));
+    transition: transform 0.2s ease, fill 0.2s ease;
+}
+
+.capital-star-group:hover .capital-star-svg {
+    fill: #FFFFFF;
+    transform: scale(1.4);
+}
