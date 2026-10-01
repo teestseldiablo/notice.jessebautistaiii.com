@@ -3,108 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>American Citizen State Resources | notice.jessebautistaiii.com</title>
-    <!-- Custom Coded US Flag & Eagle Favicon (Zero Polygons / Pure SVG Data URI) -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23030712' stroke='%23F59E0B' stroke-width='2'/%3E%3Crect x='8' y='12' width='48' height='40' fill='%231E3A8A' rx='4'/%3E%3Cpath d='M8 22h48M8 32h48M8 42h48' stroke='%23DC2626' stroke-width='4'/%3E%3Cpath d='M32 20l3 6 6 1-4.5 4.5L38 37l-6-3-6 3 1.5-5.5L23 27l6-1z' fill='%23F59E0B'/%3E%3C/svg%3E">
+    <title>American Citizen Portal</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
     <div id="canvas-container">
         <canvas id="engineCanvas"></canvas>
     </div>
-    <div class="cinematic-vignette"></div>
 
-    <!-- Accurate Cartographic Map Overlay -->
     <div id="map-overlay">
         <svg id="usMapSvg" viewBox="0 0 960 600" preserveAspectRatio="xMidYMid meet"></svg>
     </div>
 
-    <div class="ui-overlay">
-        <header>
-            <h1>American Citizen Portal</h1>
-            <p>Select any state or capital below to access official state portals, citizen benefits, and public resources.</p>
-            <nav>
-                <a href="index.html">Interactive Map</a>
-                <a href="rights.html">Constitutional Rights & Flag</a>
-            </nav>
-        </header>
+    <div id="capitals-container"></div>
 
-        <div id="capitals-container"></div>
-
-        <div class="hud-footer">
-            <div class="telemetry-panel">
-                <strong>Sovereign Network Active</strong>
-                Official D3 Albers USA Cartographic Projection • 50 States & Capitals Ready for Citizen Access.
-            </div>
-            <div class="fps-counter" id="fpsDisplay">50 States Active</div>
-        </div>
-    </div>
-
-    <!-- State Resource Popup Modal -->
     <div class="state-modal" id="stateModal">
-        <h2 id="modalStateName">State Name</h2>
-        <h3 id="modalCapitalName">Capital: City</h3>
-        <p id="modalDescription">Access official state portals, citizen benefits, business registries, and public services.</p>
+        <h2 id="modalStateName">State</h2>
+        <h3 id="modalCapitalName">Capital</h3>
         <div class="resource-links" id="modalLinks"></div>
-        <button class="close-modal" onclick="closeStateModal()">Close Portal</button>
+        <button class="close-modal" onclick="closeStateModal()">Close</button>
     </div>
 
-    <!-- D3 & TopoJSON Libraries for True Cartographic Outlines -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/topojson-client@3"></script>
 
     <script>
         const stateCapitalData = {
-            "Alabama": { capital: "Montgomery" },
-            "Alaska": { capital: "Juneau" },
-            "Arizona": { capital: "Phoenix" },
-            "Arkansas": { capital: "Little Rock" },
-            "California": { capital: "Sacramento" },
-            "Colorado": { capital: "Denver" },
-            "Connecticut": { capital: "Hartford" },
-            "Delaware": { capital: "Dover" },
-            "Florida": { capital: "Tallahassee" },
-            "Georgia": { capital: "Atlanta" },
-            "Hawaii": { capital: "Honolulu" },
-            "Idaho": { capital: "Boise" },
-            "Illinois": { capital: "Springfield" },
-            "Indiana": { capital: "Indianapolis" },
-            "Iowa": { capital: "Des Moines" },
-            "Kansas": { capital: "Topeka" },
-            "Kentucky": { capital: "Frankfort" },
-            "Louisiana": { capital: "Baton Rouge" },
-            "Maine": { capital: "Augusta" },
-            "Maryland": { capital: "Annapolis" },
-            "Massachusetts": { capital: "Boston" },
-            "Michigan": { capital: "Lansing" },
-            "Minnesota": { capital: "Saint Paul" },
-            "Mississippi": { capital: "Jackson" },
-            "Missouri": { capital: "Jefferson City" },
-            "Montana": { capital: "Helena" },
-            "Nebraska": { capital: "Lincoln" },
-            "Nevada": { capital: "Carson City" },
-            "New Hampshire": { capital: "Concord" },
-            "New Jersey": { capital: "Trenton" },
-            "New Mexico": { capital: "Santa Fe" },
-            "New York": { capital: "Albany" },
-            "North Carolina": { capital: "Raleigh" },
-            "North Dakota": { capital: "Bismarck" },
-            "Ohio": { capital: "Columbus" },
-            "Oklahoma": { capital: "Oklahoma City" },
-            "Oregon": { capital: "Salem" },
-            "Pennsylvania": { capital: "Harrisburg" },
-            "Rhode Island": { capital: "Providence" },
-            "South Carolina": { capital: "Columbia" },
-            "South Dakota": { capital: "Pierre" },
-            "Tennessee": { capital: "Nashville" },
-            "Texas": { capital: "Austin" },
-            "Utah": { capital: "Salt Lake City" },
-            "Vermont": { capital: "Montpelier" },
-            "Virginia": { capital: "Richmond" },
-            "Washington": { capital: "Olympia" },
-            "West Virginia": { capital: "Charleston" },
-            "Wisconsin": { capital: "Madison" },
-            "Wyoming": { capital: "Cheyenne" }
+            "Alabama": "Montgomery", "Alaska": "Juneau", "Arizona": "Phoenix", "Arkansas": "Little Rock",
+            "California": "Sacramento", "Colorado": "Denver", "Connecticut": "Hartford", "Delaware": "Dover",
+            "Florida": "Tallahassee", "Georgia": "Atlanta", "Hawaii": "Honolulu", "Idaho": "Boise",
+            "Illinois": "Springfield", "Indiana": "Indianapolis", "Iowa": "Des Moines", "Kansas": "Topeka",
+            "Kentucky": "Frankfort", "Louisiana": "Baton Rouge", "Maine": "Augusta", "Maryland": "Annapolis",
+            "Massachusetts": "Boston", "Michigan": "Lansing", "Minnesota": "Saint Paul", "Mississippi": "Jackson",
+            "Missouri": "Jefferson City", "Montana": "Helena", "Nebraska": "Lincoln", "Nevada": "Carson City",
+            "New Hampshire": "Concord", "New Jersey": "Trenton", "New Mexico": "Santa Fe", "New York": "Albany",
+            "North Carolina": "Raleigh", "North Dakota": "Bismarck", "Ohio": "Columbus", "Oklahoma": "Oklahoma City",
+            "Oregon": "Salem", "Pennsylvania": "Harrisburg", "Rhode Island": "Providence", "South Carolina": "Columbia",
+            "South Dakota": "Pierre", "Tennessee": "Nashville", "Texas": "Austin", "Utah": "Salt Lake City",
+            "Vermont": "Montpelier", "Virginia": "Richmond", "Washington": "Olympia", "West Virginia": "Charleston",
+            "Wisconsin": "Madison", "Wyoming": "Cheyenne"
         };
 
         const stateFipsMap = {
@@ -120,7 +57,6 @@
             "51": "Virginia", "53": "Washington", "54": "West Virginia", "55": "Wisconsin", "56": "Wyoming"
         };
 
-        // Capital Coordinate Fallbacks (Lon/Lat projected via AlbersUsa)
         const capitalCoords = {
             "Alabama": [-86.3007, 32.3668], "Alaska": [-134.4197, 58.3019], "Arizona": [-112.0740, 33.4484],
             "Arkansas": [-92.2896, 34.7465], "California": [-121.4944, 38.5816], "Colorado": [-104.9903, 39.7392],
@@ -142,18 +78,17 @@
         };
 
         function openStateModal(stateName) {
-            const info = stateCapitalData[stateName] || { capital: "Capital" };
+            const capital = stateCapitalData[stateName];
             document.getElementById('modalStateName').innerText = stateName;
-            document.getElementById('modalCapitalName').innerText = `Capital: ${info.capital}`;
-            document.getElementById('modalDescription').innerText = `Official citizen resources, state portals, voter registration, and public offerings for the State of ${stateName}.`;
+            document.getElementById('modalCapitalName').innerText = `Capital: ${capital}`;
             
             const linksContainer = document.getElementById('modalLinks');
             const stateSlug = stateName.toLowerCase().replace(/\s+/g, '');
             
             linksContainer.innerHTML = `
-                <a class="resource-btn" href="https://www.${stateSlug}.gov" target="_blank"><span>Official State Portal (.gov)</span> &rarr;</a>
-                <a class="resource-btn" href="https://www.usa.gov/state-swm" target="_blank"><span>Citizen Services & Benefits</span> &rarr;</a>
-                <a class="resource-btn" href="https://www.vote.org" target="_blank"><span>Voter Registration & Elections</span> &rarr;</a>
+                <a class="resource-btn" href="https://www.${stateSlug}.gov" target="_blank"><span>Official State Portal</span> &rarr;</a>
+                <a class="resource-btn" href="https://www.usa.gov/state-swm" target="_blank"><span>Citizen Benefits</span> &rarr;</a>
+                <a class="resource-btn" href="https://www.vote.org" target="_blank"><span>Voter Registration</span> &rarr;</a>
             `;
 
             document.getElementById('stateModal').classList.add('active');
@@ -163,7 +98,6 @@
             document.getElementById('stateModal').classList.remove('active');
         }
 
-        // Load US Atlas TopoJSON & Render True Geographic Outlines via D3 AlbersUsa
         d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json").then(us => {
             const svg = d3.select("#usMapSvg");
             const projection = d3.geoAlbersUsa().scale(1200).translate([480, 300]);
@@ -171,7 +105,6 @@
 
             const statesGeo = topojson.feature(us, us.objects.states).features;
 
-            // Render State Polygons
             svg.selectAll("path")
                 .data(statesGeo)
                 .enter().append("path")
@@ -181,44 +114,34 @@
                     const fips = String(d.id).padStart(2, '0');
                     const stateName = stateFipsMap[fips];
                     if (stateName) openStateModal(stateName);
-                })
-                .append("title")
-                .text(d => {
-                    const fips = String(d.id).padStart(2, '0');
-                    return stateFipsMap[fips] || "State";
                 });
 
-            // Render State Inner Borders
             svg.append("path")
                 .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
                 .attr("class", "state-boundary")
                 .attr("d", path);
 
-            // Render Capital Markers Positioned via AlbersUsa Projection
             const capitalsContainer = document.getElementById('capitals-container');
             Object.keys(stateCapitalData).forEach(stateName => {
                 const coords = capitalCoords[stateName];
                 if (coords) {
                     const projected = projection(coords);
                     if (projected) {
-                        const marker = document.createElement('div');
-                        marker.className = 'capital-marker';
-                        marker.innerHTML = `<span style="color:#F59E0B;">&#9733;</span> <span>${stateCapitalData[stateName].capital}</span>`;
+                        const starBtn = document.createElement('button');
+                        starBtn.className = 'capital-star';
+                        starBtn.title = stateName;
+                        starBtn.innerHTML = `<svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
                         
-                        // Map svg viewBox coords (960x600) to percentage of container
-                        marker.style.left = `${(projected[0] / 960) * 100}%`;
-                        marker.style.top = `${(projected[1] / 600) * 100}%`;
+                        starBtn.style.left = `${(projected[0] / 960) * 100}%`;
+                        starBtn.style.top = `${(projected[1] / 600) * 100}%`;
                         
-                        marker.addEventListener('click', () => openStateModal(stateName));
-                        capitalsContainer.appendChild(marker);
+                        starBtn.addEventListener('click', () => openStateModal(stateName));
+                        capitalsContainer.appendChild(starBtn);
                     }
                 }
             });
-        }).catch(err => {
-            console.error("Failed to load map topology:", err);
         });
 
-        // Background Starfield Engine
         const canvas = document.getElementById('engineCanvas');
         const ctx = canvas.getContext('2d');
         let width = window.innerWidth;
@@ -234,28 +157,26 @@
         });
 
         const particles = [];
-        for (let i = 0; i < 350; i++) {
+        for (let i = 0; i < 250; i++) {
             particles.push({
                 x: (Math.random() - 0.5) * width * 2,
                 y: (Math.random() - 0.5) * height * 2,
                 z: Math.random() * 800 - 400,
-                vx: (Math.random() - 0.5) * 0.15,
-                vy: (Math.random() - 0.5) * 0.15,
-                vz: (Math.random() - 0.5) * 0.3,
-                size: Math.random() * 2 + 0.5
+                vx: (Math.random() - 0.5) * 0.1,
+                vy: (Math.random() - 0.5) * 0.1,
+                vz: (Math.random() - 0.5) * 0.2,
+                size: Math.random() * 1.5 + 0.5
             });
         }
 
         function render() {
             ctx.fillStyle = '#030712';
             ctx.fillRect(0, 0, width, height);
-            ctx.globalCompositeOperation = 'lighter';
 
             particles.forEach(p => {
                 p.x += p.vx;
                 p.y += p.vy;
                 p.z += p.vz;
-
                 if (p.z < -400) p.z = 400;
                 if (p.z > 400) p.z = -400;
 
@@ -266,8 +187,8 @@
 
                 if (px >= 0 && px <= width && py >= 0 && py <= height) {
                     ctx.save();
-                    ctx.globalAlpha = Math.max(0.1, (p.z + 400) / 800) * 0.45;
-                    ctx.fillStyle = p.z > 0 ? '#F59E0B' : '#38BDF8';
+                    ctx.globalAlpha = Math.max(0.1, (p.z + 400) / 800) * 0.4;
+                    ctx.fillStyle = '#F59E0B';
                     ctx.beginPath();
                     ctx.arc(px, py, p.size * scale, 0, Math.PI * 2);
                     ctx.fill();
@@ -275,7 +196,6 @@
                 }
             });
 
-            ctx.globalCompositeOperation = 'source-over';
             requestAnimationFrame(render);
         }
 

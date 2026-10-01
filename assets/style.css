@@ -1,11 +1,8 @@
 ﻿:root {
     --bg-deep: #030712;
     --old-glory-red: #DC2626;
-    --old-glory-blue: #1E3A8A;
     --pure-white: #FFFFFF;
     --gold: #F59E0B;
-    --glass-bg: rgba(3, 7, 18, 0.88);
-    --border-glow: rgba(245, 158, 11, 0.3);
 }
 
 body, html {
@@ -14,7 +11,7 @@ body, html {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background-color: var(--bg-deep);
     color: var(--pure-white);
 }
@@ -28,26 +25,14 @@ body, html {
     z-index: 1;
 }
 
-.cinematic-vignette {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    pointer-events: none;
-    background: radial-gradient(circle at center, transparent 20%, rgba(3, 7, 18, 0.95) 90%);
-}
-
-/* Accurate Cartographic Map Overlay */
 #map-overlay {
     position: absolute;
-    top: 52%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 88vw;
-    max-width: 1100px;
-    height: 65vh;
+    width: 90vw;
+    max-width: 1200px;
+    height: 70vh;
     z-index: 5;
     pointer-events: none;
 }
@@ -59,120 +44,57 @@ body, html {
 }
 
 .state-path {
-    fill: rgba(10, 25, 47, 0.8);
-    stroke: rgba(245, 158, 11, 0.5);
+    fill: rgba(10, 25, 47, 0.85);
+    stroke: rgba(245, 158, 11, 0.4);
     stroke-width: 1px;
     cursor: pointer;
     pointer-events: auto;
-    transition: all 0.25s ease;
+    transition: fill 0.2s ease, stroke 0.2s ease;
 }
 
 .state-path:hover {
-    fill: rgba(220, 38, 38, 0.55);
+    fill: rgba(220, 38, 38, 0.5);
     stroke: var(--gold);
-    stroke-width: 2px;
-    filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.7));
+    stroke-width: 1.5px;
 }
 
 .state-boundary {
     fill: none;
-    stroke: rgba(245, 158, 11, 0.25);
+    stroke: rgba(245, 158, 11, 0.2);
     stroke-width: 0.5px;
 }
 
-.ui-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-    pointer-events: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 2rem;
-    box-sizing: border-box;
-}
-
-header {
-    background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--border-glow);
-    border-top: 3px solid var(--old-glory-red);
-    padding: 1.25rem 2rem;
-    border-radius: 12px;
-    pointer-events: auto;
-    max-width: 580px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-}
-
-header h1 {
-    margin: 0 0 0.3rem 0;
-    font-size: 1.4rem;
-    font-weight: 800;
-    letter-spacing: -0.01em;
-    color: var(--pure-white);
-    text-transform: uppercase;
-}
-
-header p {
-    margin: 0 0 0.8rem 0;
-    color: #94A3B8;
-    font-size: 0.8rem;
-    letter-spacing: 0.02em;
-}
-
-nav {
-    display: flex;
-    gap: 1.5rem;
-}
-
-nav a {
-    color: var(--gold);
-    text-decoration: none;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    border-bottom: 2px solid transparent;
-    padding-bottom: 0.2rem;
-    transition: all 0.3s ease;
-}
-
-nav a:hover {
-    color: var(--pure-white);
-    border-color: var(--old-glory-red);
-}
-
-.capital-marker {
+/* Star Markers aligned directly to capital coordinates */
+.capital-star {
     position: absolute;
     z-index: 8;
     transform: translate(-50%, -50%);
     cursor: pointer;
     pointer-events: auto;
+    width: 18px;
+    height: 18px;
     display: flex;
     align-items: center;
-    gap: 4px;
-    background: rgba(3, 7, 18, 0.85);
-    padding: 2px 6px;
-    border-radius: 4px;
-    border: 1px solid rgba(245, 158, 11, 0.4);
-    transition: transform 0.2s ease, background 0.2s ease;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    transition: transform 0.2s ease;
 }
 
-.capital-marker:hover {
-    background: rgba(220, 38, 38, 0.9);
-    transform: translate(-50%, -50%) scale(1.15);
-    border-color: var(--gold);
+.capital-star:hover {
+    transform: translate(-50%, -50%) scale(1.35);
 }
 
-.capital-marker span {
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--pure-white);
-    white-space: nowrap;
+.capital-star svg {
+    width: 14px;
+    height: 14px;
+    fill: var(--gold);
+    filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.8));
+}
+
+.capital-star:hover svg {
+    fill: var(--pure-white);
 }
 
 /* State Resource Popup Modal */
@@ -181,19 +103,18 @@ nav a:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.9);
-    background: rgba(10, 25, 47, 0.96);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--border-glow);
+    background: rgba(10, 25, 47, 0.98);
+    border: 1px solid rgba(245, 158, 11, 0.4);
     border-top: 4px solid var(--old-glory-red);
     padding: 2rem;
-    border-radius: 16px;
+    border-radius: 12px;
     z-index: 100;
     width: 90%;
-    max-width: 480px;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.9), 0 0 40px rgba(245, 158, 11, 0.2);
+    max-width: 440px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.9);
     display: none;
     opacity: 0;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.25s ease;
     pointer-events: auto;
 }
 
@@ -204,25 +125,18 @@ nav a:hover {
 }
 
 .state-modal h2 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.5rem;
+    margin: 0 0 0.25rem 0;
+    font-size: 1.4rem;
     color: var(--pure-white);
     text-transform: uppercase;
 }
 
 .state-modal h3 {
     margin: 0 0 1rem 0;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--gold);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-}
-
-.state-modal p {
-    color: #CBD5E1;
-    font-size: 0.85rem;
-    line-height: 1.5;
-    margin-bottom: 1.5rem;
 }
 
 .resource-links {
@@ -233,18 +147,18 @@ nav a:hover {
 }
 
 .resource-btn {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: var(--pure-white);
     padding: 0.75rem 1rem;
-    border-radius: 8px;
+    border-radius: 6px;
     text-decoration: none;
     font-size: 0.85rem;
     font-weight: 600;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: all 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .resource-btn:hover {
@@ -259,52 +173,13 @@ nav a:hover {
     border: none;
     width: 100%;
     padding: 0.75rem;
-    border-radius: 8px;
+    border-radius: 6px;
     font-weight: 700;
     text-transform: uppercase;
     cursor: pointer;
     letter-spacing: 0.05em;
-    transition: opacity 0.2s ease;
 }
 
 .close-modal:hover {
     opacity: 0.85;
-}
-
-.hud-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    pointer-events: auto;
-}
-
-.telemetry-panel {
-    background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    border: 1px solid var(--border-glow);
-    border-left: 3px solid var(--gold);
-    padding: 1rem 1.5rem;
-    border-radius: 0 8px 8px 0;
-    max-width: 380px;
-    font-size: 0.75rem;
-    color: #CBD5E1;
-}
-
-.telemetry-panel strong {
-    color: var(--gold);
-    display: block;
-    margin-bottom: 0.25rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.fps-counter {
-    background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    border: 1px solid var(--border-glow);
-    padding: 0.6rem 1rem;
-    border-radius: 8px;
-    font-family: monospace;
-    font-size: 0.75rem;
-    color: var(--gold);
 }
