@@ -115,8 +115,15 @@
             "Wisconsin": [-89.4012, 43.0731], "Wyoming": [-104.8202, 41.1400]
         };
 
-        // Comprehensive American Historical Events (1700 to Present)
+        // Comprehensive American Historical Events (1700 to Present) including Washington, D.C.
         const historicalEvents = [
+            {
+                name: "The White House, Washington, D.C. (1800)",
+                coords: [-77.0366, 38.8977],
+                year: "1800",
+                description: "Official workplace and residence of the President of the United States, completed in 1800.",
+                wikidata: "https://www.wikidata.org/wiki/Q35525"
+            },
             {
                 name: "Salem Witch Trials (1692)",
                 coords: [-70.8953, 42.5195],
@@ -255,7 +262,7 @@
             if (isHistory) {
                 linksContainer.innerHTML = `
                     <a class="resource-btn" href="${wikidataUrl}" target="_blank"><span>Wikidata Record</span> &rarr;</a>
-                    <a class="resource-btn" href="https://www.loc.gov" target="_blank"><span>Library of Congress Archives</span> &rarr;</a>
+                    <a class="resource-btn" href="https://www.whitehouse.gov" target="_blank"><span>Official White House Portal</span> &rarr;</a>
                 `;
             } else {
                 const stateSlug = title.toLowerCase().replace(/\s+/g, '');
@@ -300,8 +307,10 @@
             }
         });
 
-        // Add Historical Event Markers with THE exact White House Portico & Facade Icon
+        // Add Historical Event Markers with THE Exact White House in D.C. Silhouette Icon
         historicalEvents.forEach(evt => {
+            const isWhiteHouse = evt.name.includes("White House");
+            
             const feature = new ol.Feature({
                 geometry: new ol.geom.Point(ol.proj.fromLonLat(evt.coords)),
                 title: evt.name,
@@ -311,13 +320,18 @@
                 isHistory: true
             });
 
+            // If it's the White House, use an unmistakable neoclassical mansion silhouette with central triangular pediment & columns
+            const iconSvg = isWhiteHouse 
+                ? 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="36" height="36"><circle cx="16" cy="16" r="15" fill="%231D4ED8" stroke="%23FFFFFF" stroke-width="2"/><path d="M16 6l7 4v2H9v-2l7-4zm-6 8h12v1H10v-1zm1 2h10v10H11v-10zm2 2v6h2v-6h-2zm4 0v6h2v-6h-2z" fill="%23FFFFFF"/></svg>'
+                : 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30"><circle cx="12" cy="12" r="11" fill="%231D4ED8" stroke="%23FFFFFF" stroke-width="1.5"/><path d="M12 3l5 3v1H7V6l5-3zm-5 6h10v1H7V9zm1 2h8v7H8v-7zm1 1v5h2v-5H9zm4 0v5h2v-5h-2z" fill="%23FFFFFF"/></svg>';
+
             feature.setStyle(new ol.style.Style({
                 image: new ol.style.Icon({
                     anchor: [0.5, 0.5],
                     anchorXUnits: 'fraction',
                     anchorYUnits: 'fraction',
-                    src: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30"><circle cx="12" cy="12" r="11" fill="%231D4ED8" stroke="%23FFFFFF" stroke-width="1.5"/><path d="M12 3l5 3v1H7V6l5-3zm-5 6h10v1H7V9zm1 2h8v7H8v-7zm1 1v5h2v-5H9zm4 0v5h2v-5h-2z" fill="%23FFFFFF"/></svg>',
-                    scale: 1.2
+                    src: iconSvg,
+                    scale: isWhiteHouse ? 1.3 : 1.2
                 })
             }));
 
