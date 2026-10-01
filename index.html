@@ -118,7 +118,7 @@
         // Comprehensive American Historical Events (1700 to Present)
         const historicalEvents = [
             {
-                name: "Salem Witch Trials (1792)",
+                name: "Salem Witch Trials (1692)",
                 coords: [-70.8953, 42.5195],
                 year: "1692–1702",
                 description: "A series of hearings and prosecutions of people accused of witchcraft in colonial Massachusetts.",
@@ -300,7 +300,7 @@
             }
         });
 
-        // Add Comprehensive Historical Event Markers (Distinct Blue Monument Icons)
+        // Add Historical Event Markers with White House Icon
         historicalEvents.forEach(evt => {
             const feature = new ol.Feature({
                 geometry: new ol.geom.Point(ol.proj.fromLonLat(evt.coords)),
@@ -316,7 +316,7 @@
                     anchor: [0.5, 0.5],
                     anchorXUnits: 'fraction',
                     anchorYUnits: 'fraction',
-                    src: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="26" height="26"><circle cx="12" cy="12" r="10" fill="%231D4ED8" stroke="%23FFFFFF" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="%23FFFFFF" stroke-width="2" stroke-linecap="round"/></svg>',
+                    src: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="26" height="26"><circle cx="12" cy="12" r="10" fill="%231D4ED8" stroke="%23FFFFFF" stroke-width="1.5"/><path d="M12 7l-5 4v7h10v-7l-5-4zM9 18v-4h6v4H9z" fill="%23FFFFFF"/></svg>',
                     scale: 1.1
                 })
             }));
