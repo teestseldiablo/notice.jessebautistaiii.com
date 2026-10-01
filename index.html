@@ -1,9 +1,57 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>American Citizen Portal</title>
+    <title>American Citizen Portal | Public Notice & Knowledge Base</title>
+    
+    <!-- SEO & Metadata Optimization -->
+    <meta name="description" content="Public citizen portal and knowledge base providing geographic data, state capital registries, and civic resources. Created and maintained by Jesse Bautista III.">
+    <meta name="author" content="Jesse Bautista III">
+    <link rel="canonical" href="https://notice.jessebautistaiii.com">
+
+    <!-- Open Graph / Social SEO -->
+    <meta property="og:title" content="American Citizen Portal | Public Notice">
+    <meta property="og:description" content="Public knowledge base and interactive geographic registry of US state capitals.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://notice.jessebautistaiii.com">
+    <meta property="og:site_name" content="American Citizen Portal">
+
+    <!-- Dublin Core Metadata -->
+    <meta name="DC.title" content="American Citizen Portal">
+    <meta name="DC.creator" content="Jesse Bautista III">
+    <meta name="DC.publisher" content="Jesse Bautista III">
+    <meta name="DC.type" content="Interactive Resource">
+    <meta name="DC.format" content="text/html">
+    <meta name="DC.language" content="en">
+
+    <!-- JSON-LD Structured Data (Schema.org & Wikidata Integration) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "American Citizen Portal",
+      "url": "https://notice.jessebautistaiii.com",
+      "author": {
+        "@type": "Person",
+        "name": "Jesse Bautista III",
+        "url": "https://jessebautistaiii.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "United States State Capitals",
+          "sameAs": "https://www.wikidata.org/wiki/Q35472"
+        },
+        {
+          "@type": "Thing",
+          "name": "Public Notice",
+          "sameAs": "https://www.wikidata.org/wiki/Q7257917"
+        }
+      ]
+    }
+    </script>
+
     <link rel="stylesheet" href="assets/style.css">
     <!-- OpenLayers (Open Maps) CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v10.2.1/ol.css">
@@ -13,8 +61,13 @@
         <canvas id="engineCanvas"></canvas>
     </div>
 
-    <!-- OpenLayers Map Container -->
+    <!-- Semi-Transparent OpenLayers Map Container -->
     <div id="map" class="map"></div>
+
+    <header class="site-header">
+        <h1>American Citizen Portal</h1>
+        <p>Public Knowledge Registry &mdash; Maintained by <a href="https://jessebautistaiii.com" target="_blank" rel="author">Jesse Bautista III</a></p>
+    </header>
 
     <div class="state-modal" id="stateModal">
         <h2 id="modalStateName">State</h2>
@@ -43,7 +96,6 @@
             "Wisconsin": "Madison", "Wyoming": "Cheyenne"
         };
 
-        // Exact geographic coordinates [Longitude, Latitude] for OpenLayers Web Mercator projection
         const capitalCoords = {
             "Alabama": [-86.3007, 32.3668], "Alaska": [-134.4197, 58.3019], "Arizona": [-112.0740, 33.4484],
             "Arkansas": [-92.2896, 34.7465], "California": [-121.4944, 38.5816], "Colorado": [-104.9903, 39.7392],
@@ -85,7 +137,6 @@
             document.getElementById('stateModal').classList.remove('active');
         }
 
-        // Create OpenLayers Vector Features for each Capital Star
         const vectorSource = new ol.source.Vector();
 
         Object.keys(stateCapitalData).forEach(stateName => {
@@ -115,16 +166,12 @@
             source: vectorSource
         });
 
-        // Initialize OpenLayers Map (Open Maps) with Dark Carto / OSM Raster Background
+        // Initialize OpenLayers Map with standard OpenStreetMap raster tiles (showing terrain, labels, geography)
         const map = new ol.Map({
             target: 'map',
             layers: [
                 new ol.layer.Tile({
-                    source: new ol.source.XYZ({
-                        url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-                        subdomains: ['a', 'b', 'c', 'd'],
-                        maxZoom: 19
-                    })
+                    source: new ol.source.OSM()
                 }),
                 vectorLayer
             ],
@@ -137,7 +184,6 @@
             controls: []
         });
 
-        // Handle click events on OpenLayers features
         map.on('click', (event) => {
             const feature = map.forEachFeatureAtPixel(event.pixel, (feat) => feat);
             if (feature) {
@@ -146,7 +192,6 @@
             }
         });
 
-        // Pointer cursor styling on hover
         map.on('pointermove', (event) => {
             const hit = map.hasFeatureAtPixel(event.pixel);
             map.getTargetElement().style.cursor = hit ? 'pointer' : '';
@@ -197,7 +242,7 @@
 
                 if (px >= 0 && px <= width && py >= 0 && py <= height) {
                     ctx.save();
-                    ctx.globalAlpha = Math.max(0.1, (p.z + 400) / 800) * 0.35;
+                    ctx.globalAlpha = Math.max(0.1, (p.z + 400) / 800) * 0.45;
                     ctx.fillStyle = '#F59E0B';
                     ctx.beginPath();
                     ctx.arc(px, py, p.size * scale, 0, Math.PI * 2);
