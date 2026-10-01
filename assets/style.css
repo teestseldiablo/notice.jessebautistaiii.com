@@ -39,14 +39,14 @@ body, html {
     background: radial-gradient(circle at center, transparent 20%, rgba(3, 7, 18, 0.95) 90%);
 }
 
-/* Local Embedded SVG Map Layer Overlay */
+/* Accurate Cartographic Map Overlay */
 #map-overlay {
     position: absolute;
     top: 52%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 88vw;
-    max-width: 1050px;
+    max-width: 1100px;
     height: 65vh;
     z-index: 5;
     pointer-events: none;
@@ -59,19 +59,25 @@ body, html {
 }
 
 .state-path {
-    fill: rgba(10, 25, 47, 0.75);
-    stroke: rgba(245, 158, 11, 0.45);
-    stroke-width: 1.5px;
+    fill: rgba(10, 25, 47, 0.8);
+    stroke: rgba(245, 158, 11, 0.5);
+    stroke-width: 1px;
     cursor: pointer;
     pointer-events: auto;
     transition: all 0.25s ease;
 }
 
 .state-path:hover {
-    fill: rgba(220, 38, 38, 0.5);
+    fill: rgba(220, 38, 38, 0.55);
     stroke: var(--gold);
-    stroke-width: 2.5px;
+    stroke-width: 2px;
     filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.7));
+}
+
+.state-boundary {
+    fill: none;
+    stroke: rgba(245, 158, 11, 0.25);
+    stroke-width: 0.5px;
 }
 
 .ui-overlay {
