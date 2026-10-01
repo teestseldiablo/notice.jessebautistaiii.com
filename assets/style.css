@@ -194,3 +194,31 @@ body, html {
     fill: #FFFFFF;
     transform: scale(1.4);
 }
+
+#map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    background: transparent;
+}
+
+.leaflet-container {
+    background: transparent !important;
+}
+
+.leaflet-star-svg {
+    width: 24px;
+    height: 24px;
+    fill: #F59E0B;
+    filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.9));
+    transition: transform 0.2s ease, fill 0.2s ease;
+    cursor: pointer;
+}
+
+.leaflet-star-svg:hover {
+    fill: #FFFFFF;
+    transform: scale(1.4);
+}

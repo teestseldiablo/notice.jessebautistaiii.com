@@ -5,18 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>American Citizen Portal</title>
     <link rel="stylesheet" href="assets/style.css">
+    <!-- Leaflet CSS for OpenStreetMap integration -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 </head>
 <body>
     <div id="canvas-container">
         <canvas id="engineCanvas"></canvas>
     </div>
 
-    <div id="map-overlay">
-        <svg id="usMapSvg" viewBox="0 0 960 600" preserveAspectRatio="xMidYMid meet">
-            <g id="statesGroup"></g>
-            <g id="capitalsGroup"></g>
-        </svg>
-    </div>
+    <!-- Leaflet Map Container -->
+    <div id="map"></div>
 
     <div class="state-modal" id="stateModal">
         <h2 id="modalStateName">State</h2>
@@ -25,8 +23,8 @@
         <button class="close-modal" onclick="closeStateModal()">Close</button>
     </div>
 
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://unpkg.com/topojson-client@3"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
     <script>
         const stateCapitalData = {
@@ -45,37 +43,24 @@
             "Wisconsin": "Madison", "Wyoming": "Cheyenne"
         };
 
-        const stateFipsMap = {
-            "01": "Alabama", "02": "Alaska", "04": "Arizona", "05": "Arkansas", "06": "California",
-            "08": "Colorado", "09": "Connecticut", "10": "Delaware", "12": "Florida", "13": "Georgia",
-            "15": "Hawaii", "16": "Idaho", "17": "Illinois", "18": "Indiana", "19": "Iowa",
-            "20": "Kansas", "21": "Kentucky", "22": "Louisiana", "23": "Maine", "24": "Maryland",
-            "25": "Massachusetts", "26": "Michigan", "27": "Minnesota", "28": "Mississippi", "29": "Missouri",
-            "30": "Montana", "31": "Nebraska", "32": "Nevada", "33": "New Hampshire", "34": "New Jersey",
-            "35": "New Mexico", "36": "New York", "37": "North Carolina", "38": "North Dakota", "39": "Ohio",
-            "40": "Oklahoma", "41": "Oregon", "42": "Pennsylvania", "44": "Rhode Island", "45": "South Carolina",
-            "46": "South Dakota", "47": "Tennessee", "48": "Texas", "49": "Utah", "50": "Vermont",
-            "51": "Virginia", "53": "Washington", "54": "West Virginia", "55": "Wisconsin", "56": "Wyoming"
-        };
-
         const capitalCoords = {
-            "Alabama": [-86.3007, 32.3668], "Alaska": [-152.4044, 64.2008], "Arizona": [-112.0740, 33.4484],
-            "Arkansas": [-92.2896, 34.7465], "California": [-121.4944, 38.5816], "Colorado": [-104.9903, 39.7392],
-            "Connecticut": [-72.6734, 41.7658], "Delaware": [-75.5267, 39.1582], "Florida": [-84.2807, 30.4383],
-            "Georgia": [-84.3880, 33.7490], "Hawaii": [-157.8583, 21.3069], "Idaho": [-116.2023, 43.6150],
-            "Illinois": [-89.6501, 39.7817], "Indiana": [-86.1581, 39.7684], "Iowa": [-93.6091, 41.5868],
-            "Kansas": [-95.6845, 39.0473], "Kentucky": [-84.8753, 38.2009], "Louisiana": [-91.1403, 30.4515],
-            "Maine": [-69.7876, 44.3106], "Maryland": [-76.5011, 38.9784], "Massachusetts": [-71.0589, 42.3601],
-            "Michigan": [-84.5555, 42.7325], "Minnesota": [-93.0899, 44.9537], "Mississippi": [-90.1848, 32.2988],
-            "Missouri": [-92.1735, 38.5767], "Montana": [-112.0391, 46.5891], "Nebraska": [-96.7026, 40.8136],
-            "Nevada": [-119.7674, 39.1638], "New Hampshire": [-71.5376, 43.2081], "New Jersey": [-74.7597, 40.2206],
-            "New Mexico": [-105.9378, 35.6870], "New York": [-73.7562, 42.6526], "North Carolina": [-78.6382, 35.7796],
-            "North Dakota": [-100.7790, 46.8083], "Ohio": [-82.9988, 39.9612], "Oklahoma": [-97.5164, 35.4676],
-            "Oregon": [-123.0351, 44.9429], "Pennsylvania": [-76.8867, 40.2732], "Rhode Island": [-71.4128, 41.8240],
-            "South Carolina": [-81.0348, 34.0007], "South Dakota": [-100.3538, 44.3683], "Tennessee": [-86.7816, 36.1627],
-            "Texas": [-97.7431, 30.2672], "Utah": [-111.8910, 40.7608], "Vermont": [-72.5754, 44.2601],
-            "Virginia": [-77.4601, 37.5407], "Washington": [-122.9007, 47.0379], "West Virginia": [-81.6326, 38.3498],
-            "Wisconsin": [-89.4012, 43.0731], "Wyoming": [-104.8202, 41.1400]
+            "Alabama": [32.3668, -86.3007], "Alaska": [58.3019, -134.4197], "Arizona": [33.4484, -112.0740],
+            "Arkansas": [34.7465, -92.2896], "California": [38.5816, -121.4944], "Colorado": [39.7392, -104.9903],
+            "Connecticut": [41.7658, -72.6734], "Delaware": [39.1582, -75.5267], "Florida": [30.4383, -84.2807],
+            "Georgia": [33.7490, -84.3880], "Hawaii": [21.3069, -157.8583], "Idaho": [43.6150, -116.2023],
+            "Illinois": [39.7817, -89.6501], "Indiana": [39.7684, -86.1581], "Iowa": [41.5868, -93.6091],
+            "Kansas": [39.0473, -95.6845], "Kentucky": [38.2009, -84.8753], "Louisiana": [30.4515, -91.1403],
+            "Maine": [44.3106, -69.7876], "Maryland": [38.9784, -76.5011], "Massachusetts": [42.3601, -71.0589],
+            "Michigan": [42.7325, -84.5555], "Minnesota": [44.9537, -93.0899], "Mississippi": [32.2988, -90.1848],
+            "Missouri": [38.5767, -92.1735], "Montana": [46.5891, -112.0391], "Nebraska": [40.8136, -96.7026],
+            "Nevada": [39.1638, -119.7674], "New Hampshire": [43.2081, -71.5376], "New Jersey": [40.2206, -74.7597],
+            "New Mexico": [35.6870, -105.9378], "New York": [42.6526, -73.7562], "North Carolina": [35.7796, -78.6382],
+            "North Dakota": [46.8083, -100.7790], "Ohio": [39.9612, -82.9988], "Oklahoma": [35.4676, -97.5164],
+            "Oregon": [44.9429, -123.0351], "Pennsylvania": [40.2732, -76.8867], "Rhode Island": [41.8240, -71.4128],
+            "South Carolina": [34.0007, -81.0348], "South Dakota": [44.3683, -100.3538], "Tennessee": [36.1627, -86.7816],
+            "Texas": [30.2672, -97.7431], "Utah": [40.7608, -111.8910], "Vermont": [44.2601, -72.5754],
+            "Virginia": [37.5407, -77.4601], "Washington": [47.0379, -122.9007], "West Virginia": [38.3498, -81.6326],
+            "Wisconsin": [43.0731, -89.4012], "Wyoming": [41.1400, -104.8202]
         };
 
         function openStateModal(stateName) {
@@ -99,52 +84,32 @@
             document.getElementById('stateModal').classList.remove('active');
         }
 
-        d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json").then(us => {
-            const svg = d3.select("#usMapSvg");
-            const projection = d3.geoAlbersUsa().scale(1200).translate([480, 300]);
-            const path = d3.geoPath().projection(projection);
+        // Initialize Leaflet map with dark tile layer (CartoDB Dark Matter / OpenStreetMap ecosystem)
+        const map = L.map('map', {
+            zoomControl: false,
+            attributionControl: false
+        }).setView([37.8, -96], 4);
 
-            const statesGroup = d3.select("#statesGroup");
-            const capitalsGroup = d3.select("#capitalsGroup");
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            maxZoom: 10,
+            minZoom: 3,
+            subdomains: 'abcd'
+        }).addTo(map);
 
-            const statesGeo = topojson.feature(us, us.objects.states).features;
-
-            // Render states
-            statesGroup.selectAll("path")
-                .data(statesGeo)
-                .enter().append("path")
-                .attr("class", "state-path")
-                .attr("d", path)
-                .on("click", (event, d) => {
-                    const fips = String(d.id).padStart(2, '0');
-                    const stateName = stateFipsMap[fips];
-                    if (stateName) openStateModal(stateName);
+        // Add custom star markers for each state capital
+        Object.keys(stateCapitalData).forEach(stateName => {
+            const coords = capitalCoords[stateName];
+            if (coords) {
+                const starIcon = L.divIcon({
+                    className: 'custom-star-icon',
+                    html: `<svg viewBox="0 0 24 24" class="leaflet-star-svg"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+                    iconSize: [24, 24],
+                    iconAnchor: [12, 12]
                 });
 
-            statesGroup.append("path")
-                .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
-                .attr("class", "state-boundary")
-                .attr("d", path);
-
-            // Render native SVG star markers directly in projection space
-            Object.keys(stateCapitalData).forEach(stateName => {
-                const coords = capitalCoords[stateName];
-                if (coords) {
-                    const projected = projection(coords);
-                    if (projected) {
-                        const g = capitalsGroup.append("g")
-                            .attr("class", "capital-star-group")
-                            .attr("transform", `translate(${projected[0]}, ${projected[1]})`)
-                            .style("cursor", "pointer")
-                            .on("click", () => openStateModal(stateName));
-
-                        // Star polygon points scaled to SVG coordinate system
-                        g.append("polygon")
-                            .attr("points", "0,-6 1.76,-1.81 6,-1.43 2.73,1.55 3.71,5.77 0,3.5 -3.71,5.77 -2.73,1.55 -6,-1.43 -1.76,-1.81")
-                            .attr("class", "capital-star-svg");
-                    }
-                }
-            });
+                const marker = L.marker(coords, { icon: starIcon }).addTo(map);
+                marker.on('click', () => openStateModal(stateName));
+            }
         });
 
         const canvas = document.getElementById('engineCanvas');
