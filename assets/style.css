@@ -287,3 +287,54 @@ body, html {
 .ol-attribution {
     display: none !important;
 }
+
+.map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    background: transparent;
+    opacity: 0.60;
+    mix-blend-mode: screen;
+}
+
+.site-header {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    background: rgba(3, 7, 18, 0.85);
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    backdrop-filter: blur(8px);
+}
+
+.site-header h1 {
+    font-size: 1.1rem;
+    color: #F59E0B;
+    margin: 0;
+    font-family: system-ui, -apple-system, sans-serif;
+    letter-spacing: 0.05em;
+}
+
+.site-header p {
+    font-size: 0.8rem;
+    color: #9CA3AF;
+    margin: 4px 0 0 0;
+}
+
+.site-header a {
+    color: #60A5FA;
+    text-decoration: none;
+}
+
+.site-header a:hover {
+    text-decoration: underline;
+}
+
+.ol-attribution {
+    display: none !important;
+}
