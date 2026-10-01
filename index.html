@@ -137,13 +137,12 @@
         const labelElements = capitals.map((item, idx) => {
             const div = document.createElement('div');
             div.className = 'capital-label';
-            div.innerHTML = <span style="color:#F59E0B; text-shadow: 0 0 8px #F59E0B;">&#9733;</span>  <span style="opacity:0.7; font-size:9px;">()</span>;
+            div.innerHTML = `<span style="color:#F59E0B; text-shadow: 0 0 8px #F59E0B;">&#9733;</span> ${item.capital} <span style="opacity:0.7; font-size:9px;">(${item.state})</span>`;
             labelsContainer.appendChild(div);
             return { element: div, data: item };
         });
 
         let angleY = 0;
-        let lastTime = performance.now();
         let frameCount = 0;
         let fpsTimer = 0;
 
@@ -151,7 +150,7 @@
             // Calculate FPS
             frameCount++;
             if (currentTime - fpsTimer > 1000) {
-                fpsDisplay.innerText = FPS:  | NODES: ;
+                fpsDisplay.innerText = `FPS: ${frameCount} | NODES: ${particles.length + capitals.length}`;
                 frameCount = 0;
                 fpsTimer = currentTime;
             }
@@ -245,8 +244,8 @@
                     ctx.restore();
 
                     // Position crisp DOM Label above capital star
-                    item.element.style.left = ${screenX}px;
-                    item.element.style.top = ${screenY - 24}px;
+                    item.element.style.left = `${screenX}px`;
+                    item.element.style.top = `${screenY - 24}px`;
                     item.element.style.opacity = Math.min(1, Math.max(0.15, scale * 1.2));
                 } else {
                     item.element.style.opacity = 0;
